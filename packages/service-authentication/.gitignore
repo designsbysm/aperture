@@ -1,0 +1,7 @@
+.vscode
+logs
+
+config*.yaml
+coverage.out
+/server
+/database/schema.sql

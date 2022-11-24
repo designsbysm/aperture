@@ -14,6 +14,7 @@
     "db:down": "./scripts/migrate-down",
     "db:up": "./scripts/migrate-up",
     "db:wipe": "./scripts/database-wipe",
-    "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=smaperture -bind-tls=true"
+    "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=smaperture -bind-tls=true",
+    "start:service:auth": "cd packages/service-authentication && yarn start"
   }
 }

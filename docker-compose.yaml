@@ -24,3 +24,16 @@ services:
     image: ghcr.io/amacneil/dbmate
     volumes:
       - ./db:/db
+
+  service-authentication:
+    build:
+      context: .
+      dockerfile: ./packages/service-authentication/Dockerfile
+    container_name: aperture-service-authentication
+    depends_on:
+      - database
+    environment:
+      URL_DATABASE: postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@database/${DATABASE_NAME}?sslmode=disable
+    ports:
+      - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
+    restart: unless-stopped
