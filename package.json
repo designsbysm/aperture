@@ -1,0 +1,19 @@
+{
+  "name": "@smaperture/root",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "docker:down": "./scripts/docker-down",
+    "docker:up": "./scripts/docker-up",
+    "db:down": "./scripts/migrate-down",
+    "db:up": "./scripts/migrate-up",
+    "db:wipe": "./scripts/database-wipe",
+    "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=smaperture -bind-tls=true"
+  }
+}

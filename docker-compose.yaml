@@ -15,7 +15,7 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d
 
   migrations:
-    command: [ '--wait', 'up' ]
+    command: [ '--wait', '--no-dump-schema', 'up' ]
     container_name: aperture-migrations
     depends_on:
       - database

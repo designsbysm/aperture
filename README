@@ -1,0 +1,4 @@
+Dependencies
+DBmate: https://github.com/amacneil/dbmate
+Protobuf: https://grpc.io/docs/protoc-installation/
+golangci-lint: https://github.com/golangci/golangci-lint

@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "path": "packages/service-authentication"
+    },
+    {
+      "path": "packages/go-libs"
+    },
+    {
+      "path": "db/migrations"
+    },
+    {
+      "path": "packages/protobufs"
+    },
+    {
+      "name": "root",
+      "path": "."
+    },
+  ]
+}

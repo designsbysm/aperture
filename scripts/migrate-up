@@ -1,0 +1,5 @@
+#!/bin/bash
+
+dbmate wait
+dbmate --no-dump-schema up
+# dbmate --no-dump-schema up
