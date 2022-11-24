@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  database:
+    container_name: aperture-database
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      TZ: America/Phoenix
+    image: postgres:14.2-alpine
+    ports:
+      - ${PORT_DATABASE}:5432
+    restart: unless-stopped
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+
+  migrations:
+    command: [ '--wait', 'up' ]
+    container_name: aperture-migrations
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@database/${DATABASE_NAME}?sslmode=disable
+    image: ghcr.io/amacneil/dbmate
+    volumes:
+      - ./db:/db
