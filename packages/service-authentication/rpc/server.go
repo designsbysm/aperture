@@ -1,9 +1,9 @@
 package rpc
 
 import (
+	"github.com/smaperture/golibs/rpcserver"
 	"github.com/smaperture/service-authentication/authenticationpb"
 
-	"github.com/smaperture/rpcserver"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )

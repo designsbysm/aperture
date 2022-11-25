@@ -1,0 +1,14 @@
+{
+  "name": "@smaperture/service-authentication",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "coverage": "go test ./... -coverprofile=coverage.out && go tool cover -html=\"coverage.out\"",
+    "lint": "golangci-lint run",
+    "test": "go test ./... -cover -race"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
