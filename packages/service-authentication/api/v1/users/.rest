@@ -1,0 +1,36 @@
+@url = /api/v1/users
+@id = bb27d04d-1a8a-4e96-b15f-c5751998b7b2
+
+GET {{host}}{{url}}/
+Authorization: Bearer {{token}}
+###
+
+POST {{host}}{{url}}/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "firstName": "Scott",
+  "LastName": "Matthews",
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "role": "provider"
+}
+###
+
+GET {{host}}{{url}}/{{id}}
+Authorization: Bearer {{token}}
+###
+
+PUT {{host}}{{url}}/{{id}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "2@designsbysm.com"
+}
+###
+
+DELETE {{host}}{{url}}/{{id}}
+Authorization: Bearer {{token}}
+###

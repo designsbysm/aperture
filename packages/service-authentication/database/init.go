@@ -23,9 +23,9 @@ func Init() (err error) {
 		connection = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", user, password, host, port, name)
 	}
 
-	level := viper.GetInt("gorm.level")
+	logLevel := viper.GetInt("gorm.level")
 
-	DB, err = databaseconnect.Go(connection, level)
+	DB, err = databaseconnect.Go(connection, "authentication", logLevel)
 	if err != nil {
 		return err
 	}

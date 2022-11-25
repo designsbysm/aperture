@@ -3,8 +3,8 @@ package main
 
 import (
 	"github.com/smaperture/golibs/serverconfig"
+	"github.com/smaperture/service-authentication/api"
 	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/rpc"
 )
 
 func main() {
@@ -20,7 +20,9 @@ func main() {
 		panic(err)
 	}
 
-	if err := rpc.Server(); err != nil {
-		panic(err)
-	}
+	api.Server()
+
+	// if err := rpc.Server(); err != nil {
+	// 	panic(err)
+	// }
 }

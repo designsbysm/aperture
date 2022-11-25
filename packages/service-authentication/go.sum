@@ -57,6 +57,8 @@ github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ3
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/designsbysm/gibson v1.2.4 h1:cKyNEyjmjgT35KdKZzCQzM/o9PhhYya5PaodFegMeWQ=
+github.com/designsbysm/gibson v1.2.4/go.mod h1:+Bwku5AkMwe3hxCzzfv7bisW6JqIOVLlA5IakCL+Z5k=
 github.com/designsbysm/timber/v2 v2.10.0 h1:tkVRFxI659c2S42GZC/RX180Pkeq7FLpFHBDGf3BSUs=
 github.com/designsbysm/timber/v2 v2.10.0/go.mod h1:pjlibNW55+aaf48vygVEsW+Ig8/s+vR5GNsIyUVOb00=
 github.com/designsbysm/timberemail v1.3.0 h1:XHhs/OUYKCGVpES3PeEszQOZ+KzpLLbuJL9d4aLXe3I=
