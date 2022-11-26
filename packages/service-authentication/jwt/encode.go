@@ -1,19 +1,28 @@
 package jwt
 
-// func Encode(id uuid.UUID, role database.Role) (string, error) {
-// 	defaulDuration := 8
-// 	if role.IsAdmin {
-// 		defaulDuration = 24 * 365
-// 	}
-// 	expiration := time.Now().Add(time.Hour * time.Duration(defaulDuration)).Unix()
+import (
+	"time"
 
-// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-// 		"id":   id,
-// 		"role": role.Name,
-// 		"exp":  expiration,
-// 	})
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
+	"github.com/smaperture/service-authentication/database"
+	"github.com/spf13/viper"
+)
 
-// 	secretKey := []byte(viper.GetString("jwt.secret"))
+func Encode(id uuid.UUID, role database.RoleEnum, longLived bool) (string, error) {
+	defaulDuration := viper.GetInt("jwt.expiration")
+	if longLived {
+		defaulDuration = viper.GetInt("jwt.longLived.expiration")
+	}
+	expiration := time.Now().Add(time.Minute * time.Duration(defaulDuration)).Unix()
 
-// 	return token.SignedString(secretKey)
-// }
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"userID":   id,
+		"userRole": role,
+		"exp":      expiration,
+	})
+
+	secretKey := []byte(viper.GetString("jwt.secret"))
+
+	return token.SignedString(secretKey)
+}

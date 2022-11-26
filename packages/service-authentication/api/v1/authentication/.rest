@@ -1,0 +1,33 @@
+@url = /api/v1/authentication
+
+POST {{host}}{{url}}/signup
+Content-Type: application/json
+
+{
+  "firstName": "Scott",
+  "LastName": "Matthews",
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+###
+
+POST {{host}}{{url}}/login
+Content-Type: application/json
+LongLived: {{longLivedJWT}}
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+###
+
+POST {{host}}{{url}}/refreshAccess/5ae3bba3-b5ab-4b94-a768-9a61fc4a4c50
+LongLived: {{longLivedJWT}}
+###
+
+POST {{host}}{{url}}/current
+Authorization: Bearer {{token}}
+###
+
+POST {{host}}{{url}}/logout
+Authorization: Bearer {{token}}

@@ -3,10 +3,9 @@ package users
 import (
 	"net/http"
 
-	"github.com/smaperture/service-authentication/database"
-
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/service-authentication/database"
 	"gorm.io/gorm"
 )
 
@@ -54,6 +53,8 @@ func update(c *gin.Context) {
 	if req.Email != "" {
 		user.Email = req.Email
 	}
+
+	//nolint:errcheck
 	user.PasswordEncrypt(req.Password)
 
 	if err = user.Update(); err != nil {

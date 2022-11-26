@@ -9,8 +9,7 @@ Content-Type: application/json
   "firstName": "Scott",
   "LastName": "Matthews",
   "email": "{{email}}",
-  "password": "{{password}}",
-  "role": "admin"
+  "password": "{{password}}"
 }
 ###
 

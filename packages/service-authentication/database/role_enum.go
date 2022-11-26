@@ -12,21 +12,32 @@ const (
 )
 
 func (e RoleEnum) Level() int {
-	levels := map[RoleEnum]int{
+	roles := map[RoleEnum]int{
 		RoleAdmin:      0,
 		RoleOperations: 1,
 		RoleProvider:   2,
 		RoleUser:       3,
 	}
 
-	return levels[e]
+	return roles[e]
 }
 
-func (r RoleEnum) IsValid() error {
-	switch r {
+func (e RoleEnum) IsValid() error {
+	switch e {
 	case RoleAdmin, RoleOperations, RoleProvider, RoleUser:
 		return nil
 	}
 
 	return errors.New("invalid role type")
+}
+
+func RoleFromString(str string) RoleEnum {
+	roles := map[string]RoleEnum{
+		"admin":      RoleAdmin,
+		"operations": RoleOperations,
+		"provider":   RoleProvider,
+		"user":       RoleUser,
+	}
+
+	return roles[str]
 }

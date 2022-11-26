@@ -3,17 +3,15 @@ package users
 import (
 	"net/http"
 
-	"github.com/smaperture/service-authentication/database"
-
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/service-authentication/database"
 )
 
 type CreateRequest struct {
-	FirstName string            `json:"firstName"`
-	LastName  string            `json:"lastName"`
-	Email     string            `json:"email"`
-	Password  string            `json:"password"`
-	Role      database.RoleEnum `json:"role"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
 }
 
 func create(c *gin.Context) {
@@ -36,20 +34,6 @@ func create(c *gin.Context) {
 	}
 
 	if err := user.Create(); err != nil {
-		//nolint:errcheck
-		c.AbortWithError(http.StatusInternalServerError, err)
-		return
-	}
-
-	role := database.Role{
-		UserID: user.ID,
-		Role:   database.RoleUser,
-	}
-	if err := req.Role.IsValid(); err == nil {
-		role.Role = req.Role
-	}
-
-	if err := role.Create(); err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return

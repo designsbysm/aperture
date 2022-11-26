@@ -3,9 +3,8 @@ package users
 import (
 	"net/http"
 
-	"github.com/smaperture/service-authentication/database"
-
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/service-authentication/database"
 )
 
 func list(c *gin.Context) {

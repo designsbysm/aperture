@@ -3,10 +3,9 @@ package users
 import (
 	"net/http"
 
-	"github.com/smaperture/service-authentication/database"
-
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/service-authentication/database"
 	"gorm.io/gorm"
 )
 
