@@ -1,9 +1,5 @@
 @url = /api/v1/users
-@id = bb27d04d-1a8a-4e96-b15f-c5751998b7b2
-
-GET {{host}}{{url}}/
-Authorization: Bearer {{token}}
-###
+@id = 32cc62f0-292e-4349-9919-db2088ff22da
 
 POST {{host}}{{url}}/
 Authorization: Bearer {{token}}
@@ -14,8 +10,12 @@ Content-Type: application/json
   "LastName": "Matthews",
   "email": "{{email}}",
   "password": "{{password}}",
-  "role": "provider"
+  "role": "admin"
 }
+###
+
+GET {{host}}{{url}}/
+Authorization: Bearer {{token}}
 ###
 
 GET {{host}}{{url}}/{{id}}
@@ -27,7 +27,9 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "email": "2@designsbysm.com"
+  "firstName": "Bob",
+  "email": "bob@designsbysm.com",
+  "password": "newpassword"
 }
 ###
 

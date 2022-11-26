@@ -10,6 +10,13 @@ import (
 	"gorm.io/gorm"
 )
 
+type UpdateReqest struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+}
+
 func update(c *gin.Context) {
 	id, err := uuid.Parse(c.Param("id"))
 	if err != nil {
@@ -32,11 +39,22 @@ func update(c *gin.Context) {
 		return
 	}
 
-	if err = c.BindJSON(&user); err != nil {
+	req := UpdateReqest{}
+	if err = c.BindJSON(&req); err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
+	if req.FirstName != "" {
+		user.FirstName = req.FirstName
+	}
+	if req.LastName != "" {
+		user.LastName = req.LastName
+	}
+	if req.Email != "" {
+		user.Email = req.Email
+	}
+	user.PasswordEncrypt(req.Password)
 
 	if err = user.Update(); err != nil {
 		//nolint:errcheck
