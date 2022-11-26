@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/smaperture/service-authentication/types/role"
 	"gorm.io/gorm"
 )
 
@@ -13,7 +14,7 @@ type Role struct {
 	UpdatedAt time.Time       `json:"updatedAt"`
 	DeletedAt *gorm.DeletedAt `json:"deletedAt,omitempty"`
 	UserID    uuid.UUID       `json:"userID"`
-	Role      RoleEnum        `json:"role"`
+	Role      role.T          `json:"role"`
 }
 
 func (r *Role) Create() error {

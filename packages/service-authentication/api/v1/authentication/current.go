@@ -9,16 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/types/role"
 )
 
 type CurrentResponse struct {
-	ID        uuid.UUID         `json:"id"`
-	CreatedAt time.Time         `json:"createdAt"`
-	UpdatedAt time.Time         `json:"updatedAt"`
-	FirstName string            `json:"firstName"`
-	LastName  string            `json:"lastName"`
-	Email     string            `json:"email"`
-	Role      database.RoleEnum `json:"role"`
+	ID        uuid.UUID `json:"id"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	FirstName string    `json:"firstName"`
+	LastName  string    `json:"lastName"`
+	Email     string    `json:"email"`
+	Role      role.T    `json:"role"`
 }
 
 func current(c *gin.Context) {
@@ -59,9 +60,9 @@ func current(c *gin.Context) {
 		c.AbortWithError(http.StatusInternalServerError, errors.New("missing user role"))
 		return
 	}
-	role := data.(string)
+	userRole := data.(string)
 
-	res.Role = database.RoleFromString(role)
+	res.Role = role.FromString(userRole)
 
 	c.JSON(http.StatusOK, res)
 }

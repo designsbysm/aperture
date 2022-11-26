@@ -5,7 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/jwt"
+	"github.com/smaperture/service-authentication/types/jwt"
+	"github.com/smaperture/service-authentication/types/role"
 )
 
 type SignupRequest struct {
@@ -42,7 +43,7 @@ func signup(c *gin.Context) {
 
 	role := database.Role{
 		UserID: user.ID,
-		Role:   database.RoleUser,
+		Role:   role.RoleUser,
 	}
 	if err := role.Create(); err != nil {
 		//nolint:errcheck

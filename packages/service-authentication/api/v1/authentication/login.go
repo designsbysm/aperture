@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/jwt"
+	"github.com/smaperture/service-authentication/types/jwt"
 	"github.com/spf13/viper"
 )
 
