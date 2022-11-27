@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/types/jwt"
+	"github.com/smaperture/service-authentication/types/role"
 	"github.com/spf13/viper"
 )
 
@@ -36,18 +37,23 @@ func refreshAccess(c *gin.Context) {
 		return
 	}
 
-	role := database.Role{
+	userRole := database.Role{
 		UserID: user.ID,
 	}
-	if err := role.Read(); err != nil {
+	if err := userRole.Read(); err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)
+		return
+	}
+	if userRole.Role == role.RoleDiabled {
+		//nolint:errcheck
+		c.AbortWithStatus(http.StatusUnauthorized)
 		return
 	}
 
 	header := c.GetHeader("LongLived")
 	secretKey := viper.GetString("jwt.longLived.secret")
-	accessToken, err := jwt.Encode(user.ID, role.Role, header == secretKey)
+	accessToken, err := jwt.Encode(user.ID, userRole.Role, header == secretKey)
 	if err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)

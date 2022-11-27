@@ -15,10 +15,11 @@ CREATE INDEX idx_users_deleted_at ON authentication.users USING btree (deleted_a
 CREATE UNIQUE INDEX idx_users_email ON authentication.users USING btree (email);
 
 CREATE TYPE authentication.user_role AS ENUM (
-    'user',
-    'provider',
+    'admin',
     'operations',
-    'admin'
+    'provider',
+    'user',
+    'disabled'
 );
 
 CREATE TABLE authentication.roles (
