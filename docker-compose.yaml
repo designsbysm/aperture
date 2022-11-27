@@ -35,6 +35,7 @@ services:
       - service-logger
     environment:
       URL_DATABASE: postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@database/${DATABASE_NAME}?sslmode=disable
+      URL_DOCKER: host.docker.internal
     ports:
       - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
     restart: unless-stopped

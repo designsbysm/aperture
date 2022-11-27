@@ -24,7 +24,7 @@ func Server() {
 	}()
 
 	if viper.GetBool("gin.release") {
-		timber.Info(fmt.Sprintf("API: listening on %s (HTTP)", port))
+		timber.Info(fmt.Sprintf("API: listening on :%s", port))
 	}
 
 	// wait for ^c

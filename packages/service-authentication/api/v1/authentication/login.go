@@ -1,10 +1,12 @@
 package authentication
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 	"github.com/smaperture/service-authentication/types/jwt"
 	"github.com/spf13/viper"
 )
@@ -31,12 +33,13 @@ func login(c *gin.Context) {
 		Email: req.Email,
 	}
 	if err := user.Read(); err != nil {
-		//nolint:errcheck
-		c.AbortWithError(http.StatusInternalServerError, err)
+		rpc.LogEvent("warn", fmt.Sprintf("unknown email: %s", req.Email))
+		c.Status(http.StatusUnauthorized)
 		return
 	}
 
 	if err := user.PasswordValidate(req.Password); err != nil {
+		rpc.LogEvent("warn", fmt.Sprintf("wrong password for user: %s", user.ID))
 		c.Status(http.StatusUnauthorized)
 		return
 	}
@@ -73,5 +76,6 @@ func login(c *gin.Context) {
 		RefreshToken: refreshToken.ID,
 	}
 
+	rpc.LogEvent("info", fmt.Sprintf("user logged in: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

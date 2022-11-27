@@ -2,11 +2,13 @@ package authentication
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 )
 
 func logout(c *gin.Context) {
@@ -27,5 +29,6 @@ func logout(c *gin.Context) {
 		return
 	}
 
+	rpc.LogEvent("info", fmt.Sprintf("user logged out: %s", userID))
 	c.Status(http.StatusOK)
 }

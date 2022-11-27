@@ -1,10 +1,12 @@
 package authentication
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 	"github.com/smaperture/service-authentication/types/jwt"
 	"github.com/smaperture/service-authentication/types/role"
 )
@@ -72,5 +74,6 @@ func signup(c *gin.Context) {
 		RefreshToken: refreshToken.ID,
 	}
 
+	rpc.LogEvent("info", fmt.Sprintf("user signed up: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

@@ -3,12 +3,14 @@ package authentication
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 	"github.com/smaperture/service-authentication/types/role"
 )
 
@@ -64,5 +66,6 @@ func current(c *gin.Context) {
 
 	res.Role = role.FromString(userRole)
 
+	rpc.LogEvent("info", fmt.Sprintf("user queried: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }
