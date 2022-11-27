@@ -8,16 +8,18 @@ import (
 	"github.com/google/uuid"
 	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/phonenumber"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
 	"gorm.io/gorm"
 )
 
-type UpdateReqest struct {
-	FirstName string         `json:"firstName"`
-	LastName  string         `json:"lastName"`
-	Email     emailaddress.T `json:"email"`
-	Password  string         `json:"password"`
+type UpdateRequest struct {
+	FirstName string
+	LastName  string
+	Mobile    phonenumber.T
+	Email     emailaddress.T
+	Password  string
 }
 
 func update(c *gin.Context) {
@@ -42,7 +44,7 @@ func update(c *gin.Context) {
 		return
 	}
 
-	req := UpdateReqest{}
+	req := UpdateRequest{}
 	if err = c.BindJSON(&req); err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusBadRequest, err)
@@ -53,6 +55,9 @@ func update(c *gin.Context) {
 	}
 	if req.LastName != "" {
 		user.LastName = req.LastName
+	}
+	if req.Mobile != "" {
+		user.Mobile = req.Mobile
 	}
 	if req.Email != "" {
 		user.Email = req.Email

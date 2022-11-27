@@ -7,15 +7,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/phonenumber"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
 )
 
 type CreateRequest struct {
-	FirstName string         `json:"firstName"`
-	LastName  string         `json:"lastName"`
-	Email     emailaddress.T `json:"email"`
-	Password  string         `json:"password"`
+	FirstName string
+	LastName  string
+	Mobile    phonenumber.T
+	Email     emailaddress.T
+	Password  string
 }
 
 func create(c *gin.Context) {
@@ -29,6 +31,7 @@ func create(c *gin.Context) {
 	user := database.User{
 		FirstName: req.FirstName,
 		LastName:  req.LastName,
+		Mobile:    req.Mobile,
 		Email:     req.Email,
 	}
 	if err := user.PasswordEncrypt(req.Password); err != nil {
@@ -38,6 +41,12 @@ func create(c *gin.Context) {
 	}
 
 	if err := user.Create(); err != nil {
+		if err := user.IsDuplicateError(err); err != nil {
+			//nolint:errcheck
+			c.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return

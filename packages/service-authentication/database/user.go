@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/smaperture/go-types/emailaddress"
+	"github.com/smaperture/go-types/phonenumber"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -17,6 +18,7 @@ type User struct {
 	DeletedAt gorm.DeletedAt `json:"deletedAt,omitempty"`
 	FirstName string         `json:"firstName"`
 	LastName  string         `json:"lastName"`
+	Mobile    phonenumber.T  `json:"mobile"`
 	Email     emailaddress.T `json:"email"`
 	Password  string         `json:"-"`
 }
@@ -28,6 +30,10 @@ func (u *User) BeforeSave(tx *gorm.DB) error {
 
 	if u.LastName == "" {
 		return ErrLastNameRequired
+	}
+
+	if !u.Mobile.IsValid() {
+		return ErrInvalidMobile
 	}
 
 	if !u.Email.IsValid() {
@@ -53,6 +59,11 @@ func (u User) IsDuplicateError(err error) error {
 	regex := regexp.MustCompile(`duplicate key.*users_email`)
 	if regex.MatchString(err.Error()) {
 		return ErrDuplicateEmail
+	}
+
+	regex = regexp.MustCompile(`duplicate key.*users_mobile`)
+	if regex.MatchString(err.Error()) {
+		return ErrDuplicateMobile
 	}
 
 	return nil

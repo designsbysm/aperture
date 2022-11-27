@@ -8,6 +8,7 @@ import (
 	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/jwt"
 	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/phonenumber"
 	"github.com/smaperture/go-types/userrole"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
@@ -16,6 +17,7 @@ import (
 type SignupRequest struct {
 	FirstName string
 	LastName  string
+	Mobile    phonenumber.T
 	Email     emailaddress.T
 	Password  string
 }
@@ -31,6 +33,7 @@ func signup(c *gin.Context) {
 	user := database.User{
 		FirstName: req.FirstName,
 		LastName:  req.LastName,
+		Mobile:    req.Mobile,
 		Email:     req.Email,
 	}
 	if err := user.PasswordEncrypt(req.Password); err != nil {

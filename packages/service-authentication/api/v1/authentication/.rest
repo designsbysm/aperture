@@ -6,7 +6,8 @@ Content-Type: application/json
 
 {
   "firstName": "Scott",
-  "LastName": "Matthews",
+  "lastName": "Matthews",
+  "mobile": "{{mobile}}",
   "email": "{{email}}",
   "password": "{{password}}"
 }

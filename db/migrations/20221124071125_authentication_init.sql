@@ -8,10 +8,12 @@ CREATE TABLE authentication.users (
   deleted_at timestamp with time zone,
   first_name text NOT NULL,
   last_name text NOT NULL,
+  mobile text NOT NULL,
   email text NOT NULL,
   password text NOT NULL
 );
 CREATE INDEX idx_users_deleted_at ON authentication.users USING btree (deleted_at);
+CREATE UNIQUE INDEX idx_users_mobile ON authentication.users USING btree (mobile);
 CREATE UNIQUE INDEX idx_users_email ON authentication.users USING btree (email);
 
 CREATE TYPE authentication.user_role AS ENUM (

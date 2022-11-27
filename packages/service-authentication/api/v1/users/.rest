@@ -8,7 +8,8 @@ Content-Type: application/json
 {
   "firstName": "Scott",
   "LastName": "Matthews",
-  "email": "{{email}}",
+  "mobile": "{{mobile}}",
+  "email": "1{{email}}",
   "password": "{{password}}"
 }
 ###
@@ -27,6 +28,7 @@ Content-Type: application/json
 
 {
   "firstName": "Bob",
+  "mobile": "+15555555555",
   "email": "bob@designsbysm.com",
   "password": "newpassword"
 }
