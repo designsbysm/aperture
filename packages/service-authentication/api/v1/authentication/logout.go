@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"net/http"
 
+	"aperture/go-types/loggerlevel"
+	"aperture/service-authentication/database"
+	"aperture/service-authentication/rpc"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/rpc"
 )
 
 func logout(c *gin.Context) {

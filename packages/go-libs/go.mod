@@ -1,4 +1,4 @@
-module github.com/smaperture/go-libs
+module aperture/go-libs
 
 go 1.19
 

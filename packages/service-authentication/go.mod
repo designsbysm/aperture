@@ -1,18 +1,18 @@
-module github.com/smaperture/service-authentication
+module aperture/service-authentication
 
 go 1.19
 
-replace github.com/smaperture/go-libs => ../go-libs
+replace aperture/go-libs => ../go-libs
 
-replace github.com/smaperture/go-types => ../go-types
+replace aperture/go-types => ../go-types
 
 require (
+	aperture/go-libs v0.0.0
+	aperture/go-types v0.0.0
 	github.com/designsbysm/gibson v1.2.4
 	github.com/designsbysm/timber/v2 v2.10.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/google/uuid v1.3.0
-	github.com/smaperture/go-libs v0.0.0
-	github.com/smaperture/go-types v0.0.0
 	github.com/spf13/viper v1.14.0
 	golang.org/x/crypto v0.3.0
 	google.golang.org/grpc v1.51.0

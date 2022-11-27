@@ -3,9 +3,10 @@ package jwt
 import (
 	"time"
 
+	"aperture/go-types/userrole"
+
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/userrole"
 	"github.com/spf13/viper"
 )
 

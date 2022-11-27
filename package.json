@@ -9,12 +9,11 @@
     ]
   },
   "scripts": {
-    "docker:down": "./scripts/docker-down",
-    "docker:up": "./scripts/docker-up",
     "db:down": "./scripts/migrate-down",
     "db:up": "./scripts/migrate-up",
     "db:wipe": "./scripts/database-wipe",
-    "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=smaperture -bind-tls=true",
-    "start:service:auth": "cd packages/service-authentication && yarn start"
+    "docker:down": "./scripts/docker-down",
+    "docker:up": "./scripts/docker-up",
+    "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=aperture -bind-tls=true"
   }
 }

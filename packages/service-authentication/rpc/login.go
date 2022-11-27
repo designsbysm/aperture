@@ -3,8 +3,9 @@ package rpc
 import (
 	"context"
 
+	"aperture/service-authentication/authenticationpb"
+
 	"github.com/designsbysm/timber/v2"
-	"github.com/smaperture/service-authentication/authenticationpb"
 )
 
 func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {

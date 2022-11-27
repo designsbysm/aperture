@@ -4,9 +4,10 @@ import (
 	"regexp"
 	"time"
 
+	"aperture/go-types/emailaddress"
+	"aperture/go-types/phonenumber"
+
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/emailaddress"
-	"github.com/smaperture/go-types/phonenumber"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

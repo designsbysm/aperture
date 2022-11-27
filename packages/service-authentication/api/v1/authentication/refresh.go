@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"aperture/go-types/jwt"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/userrole"
+	"aperture/service-authentication/database"
+	"aperture/service-authentication/rpc"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/jwt"
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/userrole"
-	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/rpc"
 	"github.com/spf13/viper"
 )
 

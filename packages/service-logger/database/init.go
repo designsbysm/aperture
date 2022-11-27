@@ -1,7 +1,8 @@
 package database
 
 import (
-	"github.com/smaperture/go-libs/databaseconnect"
+	"aperture/go-libs/databaseconnect"
+
 	"gorm.io/gorm"
 )
 

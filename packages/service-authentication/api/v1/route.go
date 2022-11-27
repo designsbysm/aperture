@@ -1,9 +1,10 @@
 package v1
 
 import (
+	"aperture/service-authentication/api/v1/authentication"
+	"aperture/service-authentication/api/v1/users"
+
 	"github.com/gin-gonic/gin"
-	"github.com/smaperture/service-authentication/api/v1/authentication"
-	"github.com/smaperture/service-authentication/api/v1/users"
 )
 
 func AddRoute(r *gin.RouterGroup) {

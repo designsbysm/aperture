@@ -1,4 +1,4 @@
-module github.com/smaperture/go-types
+module aperture/go-types
 
 go 1.19
 

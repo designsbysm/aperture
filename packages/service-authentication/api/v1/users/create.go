@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"aperture/go-types/emailaddress"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/phonenumber"
+	"aperture/service-authentication/database"
+	"aperture/service-authentication/rpc"
+
 	"github.com/gin-gonic/gin"
-	"github.com/smaperture/go-types/emailaddress"
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/phonenumber"
-	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/rpc"
 )
 
 type CreateRequest struct {

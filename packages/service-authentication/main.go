@@ -2,9 +2,9 @@
 package main
 
 import (
-	"github.com/smaperture/go-libs/serverconfig"
-	"github.com/smaperture/service-authentication/api"
-	"github.com/smaperture/service-authentication/database"
+	"aperture/go-libs/serverconfig"
+	"aperture/service-authentication/api"
+	"aperture/service-authentication/database"
 )
 
 func main() {

@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"net/http"
 
+	"aperture/go-types/emailaddress"
+	"aperture/go-types/jwt"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/phonenumber"
+	"aperture/go-types/userrole"
+	"aperture/service-authentication/database"
+	"aperture/service-authentication/rpc"
+
 	"github.com/gin-gonic/gin"
-	"github.com/smaperture/go-types/emailaddress"
-	"github.com/smaperture/go-types/jwt"
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/phonenumber"
-	"github.com/smaperture/go-types/userrole"
-	"github.com/smaperture/service-authentication/database"
-	"github.com/smaperture/service-authentication/rpc"
 )
 
 type SignupRequest struct {

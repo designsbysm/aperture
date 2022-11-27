@@ -1,8 +1,9 @@
 package users
 
 import (
+	"aperture/service-authentication/middleware"
+
 	"github.com/gin-gonic/gin"
-	"github.com/smaperture/service-authentication/middleware"
 )
 
 func AddRoute(r *gin.RouterGroup) {

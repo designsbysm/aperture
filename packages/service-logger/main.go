@@ -2,9 +2,9 @@
 package main
 
 import (
-	"github.com/smaperture/go-libs/serverconfig"
-	"github.com/smaperture/service-logger/database"
-	"github.com/smaperture/service-logger/rpc"
+	"aperture/go-libs/serverconfig"
+	"aperture/service-logger/database"
+	"aperture/service-logger/rpc"
 )
 
 func main() {

@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"strings"
 
+	"aperture/go-types/jwt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/jwt"
 )
 
 func AuthorizeJWT() gin.HandlerFunc {

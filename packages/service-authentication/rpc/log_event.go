@@ -3,10 +3,11 @@ package rpc
 import (
 	"context"
 
-	"github.com/smaperture/go-libs/rpcclient"
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/loggerservice"
-	"github.com/smaperture/service-authentication/loggerpb"
+	"aperture/go-libs/rpcclient"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/loggerservice"
+	"aperture/service-authentication/loggerpb"
+
 	"github.com/spf13/viper"
 )
 

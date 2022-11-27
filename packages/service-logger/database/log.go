@@ -3,8 +3,9 @@ package database
 import (
 	"time"
 
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/loggerservice"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/loggerservice"
+
 	"gorm.io/gorm"
 )
 

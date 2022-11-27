@@ -3,10 +3,10 @@ package rpc
 import (
 	"context"
 
-	"github.com/smaperture/go-types/loggerlevel"
-	"github.com/smaperture/go-types/loggerservice"
-	"github.com/smaperture/service-logger/database"
-	"github.com/smaperture/service-logger/loggerpb"
+	"aperture/go-types/loggerlevel"
+	"aperture/go-types/loggerservice"
+	"aperture/service-logger/database"
+	"aperture/service-logger/loggerpb"
 )
 
 func (*server) Log(ctx context.Context, in *loggerpb.LogRequest) (*loggerpb.LogResponse, error) {

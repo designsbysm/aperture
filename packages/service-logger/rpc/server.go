@@ -1,8 +1,9 @@
 package rpc
 
 import (
-	"github.com/smaperture/go-libs/rpcserver"
-	"github.com/smaperture/service-logger/loggerpb"
+	"aperture/go-libs/rpcserver"
+	"aperture/service-logger/loggerpb"
+
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )

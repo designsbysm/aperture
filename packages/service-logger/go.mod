@@ -1,14 +1,14 @@
-module github.com/smaperture/service-logger
+module aperture/service-logger
 
 go 1.19
 
-replace github.com/smaperture/go-libs => ../go-libs
+replace aperture/go-libs => ../go-libs
 
-replace github.com/smaperture/go-types => ../go-types
+replace aperture/go-types => ../go-types
 
 require (
-	github.com/smaperture/go-libs v0.0.0
-	github.com/smaperture/go-types v0.0.0
+	aperture/go-libs v0.0.0
+	aperture/go-types v0.0.0
 	github.com/spf13/viper v1.14.0
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1

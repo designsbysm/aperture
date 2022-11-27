@@ -3,8 +3,9 @@ package database
 import (
 	"time"
 
+	"aperture/go-types/userrole"
+
 	"github.com/google/uuid"
-	"github.com/smaperture/go-types/userrole"
 	"gorm.io/gorm"
 )
 
