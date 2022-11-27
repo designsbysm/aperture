@@ -36,6 +36,11 @@ func login(c *gin.Context) {
 		return
 	}
 
+	if err := user.PasswordValidate(req.Password); err != nil {
+		c.Status(http.StatusUnauthorized)
+		return
+	}
+
 	role := database.Role{
 		UserID: user.ID,
 	}
