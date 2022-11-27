@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/jwt"
 	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
@@ -13,7 +14,7 @@ import (
 )
 
 type LoginRequest struct {
-	Email    string
+	Email    emailaddress.T
 	Password string
 }
 

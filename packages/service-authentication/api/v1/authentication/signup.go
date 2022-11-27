@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/jwt"
 	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/go-types/userrole"
@@ -15,7 +16,7 @@ import (
 type SignupRequest struct {
 	FirstName string
 	LastName  string
-	Email     string
+	Email     emailaddress.T
 	Password  string
 }
 
@@ -39,6 +40,12 @@ func signup(c *gin.Context) {
 	}
 
 	if err := user.Create(); err != nil {
+		if err := user.IsDuplicateError(err); err != nil {
+			//nolint:errcheck
+			c.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return

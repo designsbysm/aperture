@@ -5,16 +5,17 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
 )
 
 type CreateRequest struct {
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
+	FirstName string         `json:"firstName"`
+	LastName  string         `json:"lastName"`
+	Email     emailaddress.T `json:"email"`
+	Password  string         `json:"password"`
 }
 
 func create(c *gin.Context) {

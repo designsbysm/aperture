@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/emailaddress"
 	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
@@ -13,10 +14,10 @@ import (
 )
 
 type UpdateReqest struct {
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
+	FirstName string         `json:"firstName"`
+	LastName  string         `json:"lastName"`
+	Email     emailaddress.T `json:"email"`
+	Password  string         `json:"password"`
 }
 
 func update(c *gin.Context) {
@@ -61,6 +62,12 @@ func update(c *gin.Context) {
 	user.PasswordEncrypt(req.Password)
 
 	if err = user.Update(); err != nil {
+		if err := user.IsDuplicateError(err); err != nil {
+			//nolint:errcheck
+			c.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
 		//nolint:errcheck
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
