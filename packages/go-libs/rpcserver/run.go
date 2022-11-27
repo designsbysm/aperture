@@ -31,7 +31,6 @@ func Run(s *grpc.Server, host string, port string) error {
 	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
 	<-ch
 
-	// close
 	fmt.Println("")
 	s.Stop()
 	listener.Close()

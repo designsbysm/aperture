@@ -4,6 +4,9 @@
       "path": "packages/service-authentication"
     },
     {
+      "path": "packages/service-logger"
+    },
+    {
       "path": "packages/go-libs"
     },
     {
