@@ -17,25 +17,25 @@ type Role struct {
 	Role      role.T          `json:"role"`
 }
 
-func (r *Role) Create() error {
-	return DB.Create(&r).Error
+func (t *Role) Create() error {
+	return DB.Create(&t).Error
 }
 
-func (r *Role) Delete() error {
-	return DB.Delete(&r, r).Error
+func (t *Role) Delete() error {
+	return DB.Delete(&t, t).Error
 }
 
-func (r *Role) List() ([]Role, error) {
+func (t *Role) List() ([]Role, error) {
 	list := []Role{}
-	err := DB.Find(&list, r).Error
+	err := DB.Find(&list, t).Error
 
 	return list, err
 }
 
-func (r *Role) Read() error {
-	return DB.First(&r, r).Error
+func (t *Role) Read() error {
+	return DB.First(&t, t).Error
 }
 
-func (r *Role) Update() error {
-	return DB.Save(&r).Error
+func (t *Role) Update() error {
+	return DB.Save(&t).Error
 }

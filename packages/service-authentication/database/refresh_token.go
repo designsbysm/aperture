@@ -23,6 +23,17 @@ func (t *RefreshToken) Delete() error {
 	return DB.Delete(&t, t).Error
 }
 
+func (t *RefreshToken) List() ([]RefreshToken, error) {
+	list := []RefreshToken{}
+	err := DB.Find(&list, t).Error
+
+	return list, err
+}
+
 func (t *RefreshToken) Read() error {
 	return DB.First(&t, t).Error
+}
+
+func (t *RefreshToken) Update() error {
+	return DB.Save(&t).Error
 }

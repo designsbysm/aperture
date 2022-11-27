@@ -60,6 +60,15 @@ func refreshAccess(c *gin.Context) {
 		return
 	}
 
+	accessTokenRefreshes := database.AccessTokenRefreshes{
+		RefreshToken: refreshToken.ID,
+	}
+	if err := accessTokenRefreshes.Create(); err != nil {
+		//nolint:errcheck
+		c.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+
 	res := AuthenticationResponse{
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken.ID,
