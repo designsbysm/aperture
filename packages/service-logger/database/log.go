@@ -3,6 +3,8 @@ package database
 import (
 	"time"
 
+	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/loggerservice"
 	"gorm.io/gorm"
 )
 
@@ -11,8 +13,8 @@ type Log struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt *gorm.DeletedAt
-	Service   string
-	Level     string
+	Service   loggerservice.T
+	Level     loggerlevel.T
 	Message   string
 }
 

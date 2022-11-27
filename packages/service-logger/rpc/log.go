@@ -3,7 +3,8 @@ package rpc
 import (
 	"context"
 
-	"github.com/designsbysm/timber/v2"
+	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/loggerservice"
 	"github.com/smaperture/service-logger/database"
 	"github.com/smaperture/service-logger/loggerpb"
 )
@@ -13,11 +14,9 @@ func (*server) Log(ctx context.Context, in *loggerpb.LogRequest) (*loggerpb.LogR
 	level := in.GetLevel()
 	message := in.GetMessage()
 
-	timber.Debug(service, level, message)
-
 	log := database.Log{
-		Service: service,
-		Level:   level,
+		Service: loggerservice.FromString(service),
+		Level:   loggerlevel.FromString(level),
 		Message: message,
 	}
 

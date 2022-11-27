@@ -1,11 +1,14 @@
 package users
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 )
 
 func delete(c *gin.Context) {
@@ -25,5 +28,6 @@ func delete(c *gin.Context) {
 		return
 	}
 
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user deleted: %s", user.ID))
 	c.Status(http.StatusOK)
 }

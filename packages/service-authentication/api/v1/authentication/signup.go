@@ -5,10 +5,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/jwt"
+	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/userrole"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
-	"github.com/smaperture/service-authentication/types/jwt"
-	"github.com/smaperture/service-authentication/types/role"
 )
 
 type SignupRequest struct {
@@ -45,7 +46,7 @@ func signup(c *gin.Context) {
 
 	role := database.Role{
 		UserID: user.ID,
-		Role:   role.RoleUser,
+		Role:   userrole.User,
 	}
 	if err := role.Create(); err != nil {
 		//nolint:errcheck
@@ -74,6 +75,6 @@ func signup(c *gin.Context) {
 		RefreshToken: refreshToken.ID,
 	}
 
-	rpc.LogEvent("info", fmt.Sprintf("user signed up: %s", user.ID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user signed up: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

@@ -2,11 +2,13 @@ module github.com/smaperture/service-logger
 
 go 1.19
 
-replace github.com/smaperture/golibs => ../go-libs
+replace github.com/smaperture/go-libs => ../go-libs
+
+replace github.com/smaperture/go-types => ../go-types
 
 require (
-	github.com/designsbysm/timber/v2 v2.10.0
-	github.com/smaperture/golibs v0.0.0
+	github.com/smaperture/go-libs v0.0.0
+	github.com/smaperture/go-types v0.0.0
 	github.com/spf13/viper v1.14.0
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
@@ -14,6 +16,7 @@ require (
 )
 
 require (
+	github.com/designsbysm/timber/v2 v2.10.0 // indirect
 	github.com/designsbysm/timberemail v1.3.0 // indirect
 	github.com/designsbysm/timberfile v1.2.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect

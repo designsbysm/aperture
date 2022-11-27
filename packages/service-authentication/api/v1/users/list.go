@@ -4,7 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 )
 
 func list(c *gin.Context) {
@@ -17,5 +19,6 @@ func list(c *gin.Context) {
 		return
 	}
 
+	rpc.LogEvent(loggerlevel.Info, "users listed")
 	c.JSON(http.StatusOK, list)
 }

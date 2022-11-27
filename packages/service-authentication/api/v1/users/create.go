@@ -1,10 +1,13 @@
 package users
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 )
 
 type CreateRequest struct {
@@ -39,5 +42,6 @@ func create(c *gin.Context) {
 		return
 	}
 
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user created: %s", user.ID))
 	c.JSON(http.StatusOK, user)
 }

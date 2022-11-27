@@ -5,9 +5,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/smaperture/go-types/jwt"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
-	"github.com/smaperture/service-authentication/types/jwt"
 	"github.com/spf13/viper"
 )
 
@@ -33,13 +34,13 @@ func login(c *gin.Context) {
 		Email: req.Email,
 	}
 	if err := user.Read(); err != nil {
-		rpc.LogEvent("warn", fmt.Sprintf("unknown email: %s", req.Email))
+		rpc.LogEvent(loggerlevel.Warn, fmt.Sprintf("unknown email: %s", req.Email))
 		c.Status(http.StatusUnauthorized)
 		return
 	}
 
 	if err := user.PasswordValidate(req.Password); err != nil {
-		rpc.LogEvent("warn", fmt.Sprintf("wrong password for user: %s", user.ID))
+		rpc.LogEvent(loggerlevel.Warn, fmt.Sprintf("wrong password for user: %s", user.ID))
 		c.Status(http.StatusUnauthorized)
 		return
 	}
@@ -76,6 +77,6 @@ func login(c *gin.Context) {
 		RefreshToken: refreshToken.ID,
 	}
 
-	rpc.LogEvent("info", fmt.Sprintf("user logged in: %s", user.ID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user logged in: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

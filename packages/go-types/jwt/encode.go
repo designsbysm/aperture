@@ -5,18 +5,16 @@ import (
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
-	"github.com/smaperture/service-authentication/types/role"
+	"github.com/smaperture/go-types/userrole"
 	"github.com/spf13/viper"
 )
 
-func Encode(id uuid.UUID, role role.T, longLived bool) (string, error) {
+func Encode(id uuid.UUID, role userrole.T, longLived bool) (string, error) {
 	defaulDuration := viper.GetInt("jwt.expiration")
 	if longLived {
 		defaulDuration = viper.GetInt("jwt.longLived.expiration")
 	}
 	expiration := time.Now().Add(time.Minute * time.Duration(defaulDuration)).Unix()
-
-	// timber.Debug(role)
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"userID":   id,

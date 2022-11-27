@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/smaperture/service-authentication/types/jwt"
+	"github.com/smaperture/go-types/jwt"
 )
 
 func AuthorizeJWT() gin.HandlerFunc {

@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 
-	"github.com/smaperture/golibs/databaseconnect"
+	"github.com/smaperture/go-libs/databaseconnect"
 
 	"github.com/spf13/viper"
 	"gorm.io/gorm"

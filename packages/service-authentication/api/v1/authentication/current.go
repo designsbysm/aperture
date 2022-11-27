@@ -9,19 +9,20 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/userrole"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
-	"github.com/smaperture/service-authentication/types/role"
 )
 
 type CurrentResponse struct {
-	ID        uuid.UUID `json:"id"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
-	FirstName string    `json:"firstName"`
-	LastName  string    `json:"lastName"`
-	Email     string    `json:"email"`
-	Role      role.T    `json:"role"`
+	ID        uuid.UUID  `json:"id"`
+	CreatedAt time.Time  `json:"createdAt"`
+	UpdatedAt time.Time  `json:"updatedAt"`
+	FirstName string     `json:"firstName"`
+	LastName  string     `json:"lastName"`
+	Email     string     `json:"email"`
+	Role      userrole.T `json:"role"`
 }
 
 func current(c *gin.Context) {
@@ -64,8 +65,8 @@ func current(c *gin.Context) {
 	}
 	userRole := data.(string)
 
-	res.Role = role.FromString(userRole)
+	res.Role = userrole.FromString(userRole)
 
-	rpc.LogEvent("info", fmt.Sprintf("user queried: %s", user.ID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user queried: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

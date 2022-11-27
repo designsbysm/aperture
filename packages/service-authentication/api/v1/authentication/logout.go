@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
 )
@@ -29,6 +30,6 @@ func logout(c *gin.Context) {
 		return
 	}
 
-	rpc.LogEvent("info", fmt.Sprintf("user logged out: %s", userID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user logged out: %s", userID))
 	c.Status(http.StatusOK)
 }

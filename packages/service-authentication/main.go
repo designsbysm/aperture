@@ -2,7 +2,7 @@
 package main
 
 import (
-	"github.com/smaperture/golibs/serverconfig"
+	"github.com/smaperture/go-libs/serverconfig"
 	"github.com/smaperture/service-authentication/api"
 	"github.com/smaperture/service-authentication/database"
 )

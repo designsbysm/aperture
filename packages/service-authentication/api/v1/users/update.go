@@ -1,11 +1,14 @@
 package users
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/loggerlevel"
 	"github.com/smaperture/service-authentication/database"
+	"github.com/smaperture/service-authentication/rpc"
 	"gorm.io/gorm"
 )
 
@@ -63,5 +66,6 @@ func update(c *gin.Context) {
 		return
 	}
 
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user updated: %s", user.ID))
 	c.JSON(http.StatusOK, user)
 }

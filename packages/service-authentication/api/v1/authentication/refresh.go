@@ -6,10 +6,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/smaperture/go-types/jwt"
+	"github.com/smaperture/go-types/loggerlevel"
+	"github.com/smaperture/go-types/userrole"
 	"github.com/smaperture/service-authentication/database"
 	"github.com/smaperture/service-authentication/rpc"
-	"github.com/smaperture/service-authentication/types/jwt"
-	"github.com/smaperture/service-authentication/types/role"
 	"github.com/spf13/viper"
 )
 
@@ -47,7 +48,7 @@ func refreshAccess(c *gin.Context) {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
-	if userRole.Role == role.RoleDiabled {
+	if userRole.Role == userrole.Diabled {
 		//nolint:errcheck
 		c.AbortWithStatus(http.StatusUnauthorized)
 		return
@@ -76,6 +77,6 @@ func refreshAccess(c *gin.Context) {
 		RefreshToken: refreshToken.ID,
 	}
 
-	rpc.LogEvent("info", fmt.Sprintf("access token refeshed: %s", refreshToken.ID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("access token refeshed: %s", refreshToken.ID))
 	c.JSON(http.StatusOK, res)
 }
