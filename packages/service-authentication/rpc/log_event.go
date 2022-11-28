@@ -12,7 +12,7 @@ import (
 )
 
 func LogEvent(level loggerlevel.T, message string) {
-	host := viper.GetString("URL_DOCKER")
+	host := viper.GetString("RPC_HOST_CLIENT")
 	port := viper.GetString("PORT_SERVICE_LOGGER")
 
 	connection, err := rpcclient.Run(host, port)

@@ -13,11 +13,12 @@ type server struct {
 }
 
 func Server() error {
+	host := viper.GetString("RPC_HOST_SERVER")
 	port := viper.GetString("PORT_SERVICE_AUTHENTICATION")
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
 	authenticationpb.RegisterAuthenticationServiceServer(s, &server{})
 
-	return rpcserver.Run(s, "", port)
+	return rpcserver.Run(s, host, port)
 }

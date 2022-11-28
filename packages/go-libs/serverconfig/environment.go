@@ -23,22 +23,22 @@ func Environment() error {
 	}
 
 	// load env variables
-	err := viper.BindEnv("URL_DATABASE")
+	err := viper.BindEnv("DATABASE_URL")
 	if err != nil {
 		return err
 	}
 
-	err = viper.BindEnv("URL_DOCKER")
+	err = viper.BindEnv("RPC_HOST_CLIENT")
+	if err != nil {
+		return err
+	}
+
+	err = viper.BindEnv("RPC_HOST_SERVER")
 	if err != nil {
 		return err
 	}
 
 	// setup stuff
-	production := viper.GetBool("production")
-	if !production {
-		viper.Set("URL_DOCKER", "localhost")
-	}
-
 	if viper.GetBool("gin.release") {
 		gin.SetMode(gin.ReleaseMode)
 	}
