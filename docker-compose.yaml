@@ -35,8 +35,7 @@ services:
       - service-logger
     environment:
       DATABASE_URL: ${DOCKER_DATABASE_URL}
-      RPC_HOST_CLIENT: ${DOCKER_RPC_HOST_CLIENT}
-      RPC_HOST_SERVER: ${DOCKER_RPC_HOST_SERVER}
+      DOMAIN: ${DOCKER_DOMAIN}
     ports:
       - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
     restart: unless-stopped
@@ -50,8 +49,7 @@ services:
       - database
     environment:
       DATABASE_URL: ${DOCKER_DATABASE_URL}
-      RPC_HOST_CLIENT: ${DOCKER_RPC_HOST_CLIENT}
-      RPC_HOST_SERVER: ${DOCKER_RPC_HOST_SERVER}
+      DOMAIN: ${DOCKER_DOMAIN}
     ports:
       - ${PORT_SERVICE_LOGGER}:${PORT_SERVICE_LOGGER}
     restart: unless-stopped

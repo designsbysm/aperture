@@ -28,12 +28,7 @@ func Environment() error {
 		return err
 	}
 
-	err = viper.BindEnv("RPC_HOST_CLIENT")
-	if err != nil {
-		return err
-	}
-
-	err = viper.BindEnv("RPC_HOST_SERVER")
+	err = viper.BindEnv("DOMAIN")
 	if err != nil {
 		return err
 	}
