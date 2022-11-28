@@ -64,8 +64,11 @@ func update(c *gin.Context) {
 		user.Email = req.Email
 	}
 
-	//nolint:errcheck
-	user.PasswordEncrypt(req.Password)
+	if user.PasswordEncrypt(req.Password); err != nil {
+		//nolint:errcheck
+		c.AbortWithError(http.StatusBadRequest, err)
+		return
+	}
 
 	if err = user.Update(); err != nil {
 		if err := user.IsDuplicateError(err); err != nil {

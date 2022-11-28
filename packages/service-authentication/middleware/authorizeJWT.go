@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 
@@ -14,6 +15,12 @@ func AuthorizeJWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		header := c.GetHeader("Authorization")
 		token := strings.TrimPrefix(header, "Bearer ")
+
+		if token == "" {
+			//nolint:errcheck
+			c.AbortWithError(http.StatusUnauthorized, errors.New("authorization bearer token missing"))
+			return
+		}
 
 		claims, err := jwt.Decode(token)
 		if err != nil {

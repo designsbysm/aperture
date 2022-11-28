@@ -10,7 +10,7 @@ import (
 )
 
 type Role struct {
-	ID        uint            `json:"id"`
+	ID        uint64          `json:"id"`
 	CreatedAt time.Time       `json:"createdAt"`
 	UpdatedAt time.Time       `json:"updatedAt"`
 	DeletedAt *gorm.DeletedAt `json:"deletedAt,omitempty"`

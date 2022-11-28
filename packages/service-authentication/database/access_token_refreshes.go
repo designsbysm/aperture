@@ -8,7 +8,7 @@ import (
 )
 
 type AccessTokenRefreshes struct {
-	ID           uint
+	ID           uint64
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 	DeletedAt    *gorm.DeletedAt
