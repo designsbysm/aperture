@@ -1,7 +1,5 @@
 package loggerlevel
 
-import "errors"
-
 type T string
 
 const (
@@ -10,13 +8,13 @@ const (
 	Warn  T = "warn"
 )
 
-func (t T) IsValid() error {
+func (t T) IsValid() bool {
 	switch t {
 	case Error, Info, Warn:
-		return nil
+		return true
 	}
 
-	return errors.New("invalid loggelevel")
+	return false
 }
 
 func FromString(str string) T {

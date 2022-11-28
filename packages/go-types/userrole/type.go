@@ -1,7 +1,5 @@
 package userrole
 
-import "errors"
-
 type T string
 
 const (
@@ -12,13 +10,13 @@ const (
 	User       T = "user"
 )
 
-func (t T) IsValid() error {
+func (t T) IsValid() bool {
 	switch t {
 	case Admin, Diabled, Operations, Provider, User:
-		return nil
+		return true
 	}
 
-	return errors.New("invalid userrole")
+	return false
 }
 
 func FromString(str string) T {
