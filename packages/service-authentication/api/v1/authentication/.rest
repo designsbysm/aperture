@@ -3,6 +3,7 @@
 
 POST {{host}}{{url}}/signup
 Content-Type: application/json
+LongLived: {{longLivedJWT}}
 
 {
   "firstName": "Scott",

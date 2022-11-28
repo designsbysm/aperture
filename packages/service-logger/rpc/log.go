@@ -14,13 +14,13 @@ func (*server) Log(ctx context.Context, in *loggerpb.LogRequest) (*loggerpb.LogR
 	level := in.GetLevel()
 	message := in.GetMessage()
 
-	log := database.Log{
+	event := database.Event{
 		Service: loggerservice.FromString(service),
 		Level:   loggerlevel.FromString(level),
 		Message: message,
 	}
 
-	err := log.Create()
+	err := event.Create()
 	res := loggerpb.LogResponse{}
 
 	return &res, err
