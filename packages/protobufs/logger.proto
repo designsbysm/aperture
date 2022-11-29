@@ -12,5 +12,5 @@ message LogRequest {
 message LogResponse {}
 
 service LoggerService {
-  rpc Log(LogRequest) returns (LogResponse) {};
+  rpc LogEvent(LogRequest) returns (LogResponse) {};
 }

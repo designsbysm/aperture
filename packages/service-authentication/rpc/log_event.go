@@ -29,7 +29,7 @@ func LogEvent(level loggerlevel.T, message string) {
 		Message: message,
 	}
 
-	if _, err := client.Log(context.Background(), &req); err != nil {
+	if _, err := client.LogEvent(context.Background(), &req); err != nil {
 		panic(err)
 	}
 }

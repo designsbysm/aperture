@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LoggerServiceClient interface {
-	Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error)
+	LogEvent(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error)
 }
 
 type loggerServiceClient struct {
@@ -33,9 +33,9 @@ func NewLoggerServiceClient(cc grpc.ClientConnInterface) LoggerServiceClient {
 	return &loggerServiceClient{cc}
 }
 
-func (c *loggerServiceClient) Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error) {
+func (c *loggerServiceClient) LogEvent(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error) {
 	out := new(LogResponse)
-	err := c.cc.Invoke(ctx, "/logger.LoggerService/Log", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/logger.LoggerService/LogEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *loggerServiceClient) Log(ctx context.Context, in *LogRequest, opts ...g
 // All implementations must embed UnimplementedLoggerServiceServer
 // for forward compatibility
 type LoggerServiceServer interface {
-	Log(context.Context, *LogRequest) (*LogResponse, error)
+	LogEvent(context.Context, *LogRequest) (*LogResponse, error)
 	mustEmbedUnimplementedLoggerServiceServer()
 }
 
@@ -54,8 +54,8 @@ type LoggerServiceServer interface {
 type UnimplementedLoggerServiceServer struct {
 }
 
-func (UnimplementedLoggerServiceServer) Log(context.Context, *LogRequest) (*LogResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Log not implemented")
+func (UnimplementedLoggerServiceServer) LogEvent(context.Context, *LogRequest) (*LogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogEvent not implemented")
 }
 func (UnimplementedLoggerServiceServer) mustEmbedUnimplementedLoggerServiceServer() {}
 
@@ -70,20 +70,20 @@ func RegisterLoggerServiceServer(s grpc.ServiceRegistrar, srv LoggerServiceServe
 	s.RegisterService(&LoggerService_ServiceDesc, srv)
 }
 
-func _LoggerService_Log_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LoggerService_LogEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LogRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LoggerServiceServer).Log(ctx, in)
+		return srv.(LoggerServiceServer).LogEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/logger.LoggerService/Log",
+		FullMethod: "/logger.LoggerService/LogEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoggerServiceServer).Log(ctx, req.(*LogRequest))
+		return srv.(LoggerServiceServer).LogEvent(ctx, req.(*LogRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var LoggerService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LoggerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Log",
-			Handler:    _LoggerService_Log_Handler,
+			MethodName: "LogEvent",
+			Handler:    _LoggerService_LogEvent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

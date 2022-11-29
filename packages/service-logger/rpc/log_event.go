@@ -9,7 +9,7 @@ import (
 	"aperture/service-logger/loggerpb"
 )
 
-func (*server) Log(ctx context.Context, in *loggerpb.LogRequest) (*loggerpb.LogResponse, error) {
+func (*server) LogEvent(ctx context.Context, in *loggerpb.LogRequest) (*loggerpb.LogResponse, error) {
 	service := in.GetService()
 	level := in.GetLevel()
 	message := in.GetMessage()
