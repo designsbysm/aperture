@@ -78,7 +78,6 @@ func login(c *gin.Context) {
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken.ID,
 	}
-
 	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user logged in: %s", user.ID))
 	c.JSON(http.StatusOK, res)
 }

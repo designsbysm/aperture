@@ -1,4 +1,4 @@
 #!/bin/bash
 
 dbmate wait
-dbmate --no-dump-schema up -v
+dbmate up -v
