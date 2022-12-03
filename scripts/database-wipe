@@ -1,4 +1,5 @@
 #!/bin/bash
 
-docker-compose rm -fsv database
+docker-compose rm -fsv database migrations
 docker-compose up -d database migrations
+docker-compose logs -f migrations
