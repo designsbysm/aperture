@@ -1,0 +1,175 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks"
+  ],
+  "root": true,
+  "rules": {
+    "array-bracket-newline": [
+      "warn",
+      {
+        "multiline": true
+      }
+    ],
+    "array-element-newline": [
+      "warn",
+      "always"
+    ],
+    "arrow-parens": [
+      "warn",
+      "as-needed"
+    ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
+    ],
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "ArrayExpression": 1,
+        "SwitchCase": 1
+      }
+    ],
+    "function-call-argument-newline": [
+      "error",
+      "consistent"
+    ],
+    "function-paren-newline": [
+      "error",
+      "consistent"
+    ],
+    "newline-per-chained-call": [
+      "warn",
+      {
+        "ignoreChainWithDepth": 1
+      }
+    ],
+    "no-cond-assign": [
+      "error",
+      "always"
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "error",
+          "info",
+          "warn"
+        ]
+      }
+    ],
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": "warn",
+    "no-multi-spaces": "warn",
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxEOF": 0
+      }
+    ],
+    "no-shadow": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": "error",
+    "no-undef": 0,
+    "no-var": "error",
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "object-shorthand": [
+      "warn",
+      "always"
+    ],
+    "one-var": [
+      "error",
+      "never"
+    ],
+    "prefer-const": "error",
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "quote-props": [
+      "warn",
+      "as-needed"
+    ],
+    "radix": "error",
+    "require-await": "error",
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "sort-keys": "warn",
+    "spaced-comment": [
+      "warn",
+      "always"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.jsx",
+        "*.tsx"
+      ],
+      "rules": {
+        "jsx-quotes": [
+          "warn",
+          "prefer-single"
+        ],
+        "no-unused-vars": "off",
+        "react/jsx-closing-bracket-location": [
+          "warn",
+          {
+            "selfClosing": "line-aligned",
+            "nonEmpty": "after-props"
+          }
+        ],
+        "react/jsx-first-prop-new-line": [
+          "warn",
+          "multiline-multiprop"
+        ],
+        "react/jsx-max-props-per-line": [
+          "error",
+          {
+            "maximum": 1
+          }
+        ],
+        "react/jsx-sort-props": "warn",
+        "react/prop-types": "off",
+        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/rules-of-hooks": "error"
+      }
+    }
+  ]
+}

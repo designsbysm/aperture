@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Aperture",
+    "slug": "sm-aperture",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#f2f2f2"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "buildNumber": "1.0.1",
+      "bundleIdentifier": "com.designsbysm.smaperture",
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#f2f2f2",
+        "foregroundImage": "./assets/adaptive-icon.png"
+      },
+      "package": "com.designsbysm.smaperture",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

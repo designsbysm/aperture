@@ -1,0 +1,53 @@
+{
+  "root": "apps/patient-app",
+  "projectType": "application",
+  "sourceRoot": "apps/patient-app",
+  "targets": {
+    "serve": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "start"
+      }
+    },
+    "run-ios": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "ios"
+      }
+    },
+    "run-android": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "android"
+      }
+    },
+    "run-web": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "web"
+      }
+    },
+    "preview-android": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "preview:android"
+      }
+    },
+    "preview-ios": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "preview:ios"
+      }
+    },
+    "build-web": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "build:web"
+      },
+      "outputs": [
+        "web-build"
+      ]
+    }
+  },
+  "tags": []
+}
