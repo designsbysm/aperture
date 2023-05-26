@@ -11,6 +11,5 @@ COPY .env .
 COPY ./packages/service-authentication .
 RUN rm config.yaml
 RUN mv config.prod.yaml config.yaml
-# COPY ./packages/service-authentication/config.prod.yaml config.yaml
 
 CMD ["go", "run", "."]
