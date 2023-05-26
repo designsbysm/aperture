@@ -11,6 +11,5 @@ COPY .env .
 COPY ./packages/service-logger .
 RUN rm config.yaml
 RUN mv config.prod.yaml config.yaml
-# COPY ./packages/service-logger/config.prod.yaml config.yaml
 
 CMD ["go", "run", "."]
