@@ -24,6 +24,13 @@ CREATE SCHEMA logger;
 
 
 --
+-- Name: northwind; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA northwind;
+
+
+--
 -- Name: user_role; Type: TYPE; Schema: authentication; Owner: -
 --
 
@@ -175,6 +182,188 @@ ALTER TABLE logger.events ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
+-- Name: categories; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.categories (
+    category_id smallint NOT NULL,
+    category_name character varying(15) NOT NULL,
+    description text
+);
+
+
+--
+-- Name: customers; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.customers (
+    customer_id bpchar NOT NULL,
+    company_name character varying(40) NOT NULL,
+    contact_name character varying(30),
+    contact_title character varying(30),
+    address character varying(60),
+    city character varying(15),
+    region character varying(15),
+    postal_code character varying(10),
+    country character varying(15),
+    phone character varying(24),
+    fax character varying(24)
+);
+
+
+--
+-- Name: employee_territories; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.employee_territories (
+    employee_id smallint NOT NULL,
+    territory_id character varying(20) NOT NULL
+);
+
+
+--
+-- Name: employees; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.employees (
+    employee_id smallint NOT NULL,
+    last_name character varying(20) NOT NULL,
+    first_name character varying(10) NOT NULL,
+    title character varying(30),
+    title_of_courtesy character varying(25),
+    birth_date date,
+    hire_date date,
+    address character varying(60),
+    city character varying(15),
+    region character varying(15),
+    postal_code character varying(10),
+    country character varying(15),
+    home_phone character varying(24),
+    extension character varying(4),
+    notes text,
+    reports_to smallint,
+    photo_path character varying(255)
+);
+
+
+--
+-- Name: order_details; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.order_details (
+    order_id smallint NOT NULL,
+    product_id smallint NOT NULL,
+    unit_price real NOT NULL,
+    quantity smallint NOT NULL,
+    discount real NOT NULL
+);
+
+
+--
+-- Name: orders; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.orders (
+    order_id smallint NOT NULL,
+    customer_id bpchar,
+    employee_id smallint,
+    order_date date,
+    required_date date,
+    shipped_date date,
+    ship_via smallint,
+    freight real,
+    ship_name character varying(40),
+    ship_address character varying(60),
+    ship_city character varying(15),
+    ship_region character varying(15),
+    ship_postal_code character varying(10),
+    ship_country character varying(15)
+);
+
+
+--
+-- Name: products; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.products (
+    product_id smallint NOT NULL,
+    product_name character varying(40) NOT NULL,
+    supplier_id smallint,
+    category_id smallint,
+    quantity_per_unit character varying(20),
+    unit_price real,
+    units_in_stock smallint,
+    units_on_order smallint,
+    reorder_level smallint,
+    discontinued integer NOT NULL
+);
+
+
+--
+-- Name: region; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.region (
+    region_id smallint NOT NULL,
+    region_description bpchar NOT NULL
+);
+
+
+--
+-- Name: shippers; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.shippers (
+    shipper_id smallint NOT NULL,
+    company_name character varying(40) NOT NULL,
+    phone character varying(24)
+);
+
+
+--
+-- Name: suppliers; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.suppliers (
+    supplier_id smallint NOT NULL,
+    company_name character varying(40) NOT NULL,
+    contact_name character varying(30),
+    contact_title character varying(30),
+    address character varying(60),
+    city character varying(15),
+    region character varying(15),
+    postal_code character varying(10),
+    country character varying(15),
+    phone character varying(24),
+    fax character varying(24),
+    homepage text
+);
+
+
+--
+-- Name: territories; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.territories (
+    territory_id character varying(20) NOT NULL,
+    territory_description bpchar NOT NULL,
+    region_id smallint NOT NULL
+);
+
+
+--
+-- Name: us_states; Type: TABLE; Schema: northwind; Owner: -
+--
+
+CREATE TABLE northwind.us_states (
+    state_id smallint NOT NULL,
+    state_name character varying(100),
+    state_abbr character varying(2),
+    state_region character varying(50)
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -221,6 +410,102 @@ ALTER TABLE ONLY authentication.users
 
 ALTER TABLE ONLY logger.events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories pk_categories; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.categories
+    ADD CONSTRAINT pk_categories PRIMARY KEY (category_id);
+
+
+--
+-- Name: customers pk_customers; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.customers
+    ADD CONSTRAINT pk_customers PRIMARY KEY (customer_id);
+
+
+--
+-- Name: employee_territories pk_employee_territories; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.employee_territories
+    ADD CONSTRAINT pk_employee_territories PRIMARY KEY (employee_id, territory_id);
+
+
+--
+-- Name: employees pk_employees; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.employees
+    ADD CONSTRAINT pk_employees PRIMARY KEY (employee_id);
+
+
+--
+-- Name: order_details pk_order_details; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.order_details
+    ADD CONSTRAINT pk_order_details PRIMARY KEY (order_id, product_id);
+
+
+--
+-- Name: orders pk_orders; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.orders
+    ADD CONSTRAINT pk_orders PRIMARY KEY (order_id);
+
+
+--
+-- Name: products pk_products; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.products
+    ADD CONSTRAINT pk_products PRIMARY KEY (product_id);
+
+
+--
+-- Name: region pk_region; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.region
+    ADD CONSTRAINT pk_region PRIMARY KEY (region_id);
+
+
+--
+-- Name: shippers pk_shippers; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.shippers
+    ADD CONSTRAINT pk_shippers PRIMARY KEY (shipper_id);
+
+
+--
+-- Name: suppliers pk_suppliers; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.suppliers
+    ADD CONSTRAINT pk_suppliers PRIMARY KEY (supplier_id);
+
+
+--
+-- Name: territories pk_territories; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.territories
+    ADD CONSTRAINT pk_territories PRIMARY KEY (territory_id);
+
+
+--
+-- Name: us_states pk_usstates; Type: CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.us_states
+    ADD CONSTRAINT pk_usstates PRIMARY KEY (state_id);
 
 
 --
@@ -347,6 +632,94 @@ ALTER TABLE ONLY authentication.roles
 
 
 --
+-- Name: employee_territories fk_employee_territories_employees; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.employee_territories
+    ADD CONSTRAINT fk_employee_territories_employees FOREIGN KEY (employee_id) REFERENCES northwind.employees(employee_id);
+
+
+--
+-- Name: employee_territories fk_employee_territories_territories; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.employee_territories
+    ADD CONSTRAINT fk_employee_territories_territories FOREIGN KEY (territory_id) REFERENCES northwind.territories(territory_id);
+
+
+--
+-- Name: employees fk_employees_employees; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.employees
+    ADD CONSTRAINT fk_employees_employees FOREIGN KEY (reports_to) REFERENCES northwind.employees(employee_id);
+
+
+--
+-- Name: order_details fk_order_details_orders; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.order_details
+    ADD CONSTRAINT fk_order_details_orders FOREIGN KEY (order_id) REFERENCES northwind.orders(order_id);
+
+
+--
+-- Name: order_details fk_order_details_products; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.order_details
+    ADD CONSTRAINT fk_order_details_products FOREIGN KEY (product_id) REFERENCES northwind.products(product_id);
+
+
+--
+-- Name: orders fk_orders_customers; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.orders
+    ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES northwind.customers(customer_id);
+
+
+--
+-- Name: orders fk_orders_employees; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.orders
+    ADD CONSTRAINT fk_orders_employees FOREIGN KEY (employee_id) REFERENCES northwind.employees(employee_id);
+
+
+--
+-- Name: orders fk_orders_shippers; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.orders
+    ADD CONSTRAINT fk_orders_shippers FOREIGN KEY (ship_via) REFERENCES northwind.shippers(shipper_id);
+
+
+--
+-- Name: products fk_products_categories; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.products
+    ADD CONSTRAINT fk_products_categories FOREIGN KEY (category_id) REFERENCES northwind.categories(category_id);
+
+
+--
+-- Name: products fk_products_suppliers; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.products
+    ADD CONSTRAINT fk_products_suppliers FOREIGN KEY (supplier_id) REFERENCES northwind.suppliers(supplier_id);
+
+
+--
+-- Name: territories fk_territories_region; Type: FK CONSTRAINT; Schema: northwind; Owner: -
+--
+
+ALTER TABLE ONLY northwind.territories
+    ADD CONSTRAINT fk_territories_region FOREIGN KEY (region_id) REFERENCES northwind.region(region_id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -358,4 +731,5 @@ ALTER TABLE ONLY authentication.roles
 INSERT INTO public.schema_migrations (version) VALUES
     ('20221124071125'),
     ('20221124071126'),
-    ('20221127000046');
+    ('20221127000046'),
+    ('20221203171301');

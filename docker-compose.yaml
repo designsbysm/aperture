@@ -1,5 +1,38 @@
 version: "3.7"
 services:
+  authentication:
+    build:
+      context: .
+      dockerfile: ./packages/service-authentication/Dockerfile
+    container_name: aperture-authentication
+    depends_on:
+      - database
+      - logger
+    environment:
+      DATABASE_URL: ${DOCKER_DATABASE_URL}
+      DOMAIN: ${DOCKER_DOMAIN}
+    ports:
+      - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
+    restart: unless-stopped
+
+  client:
+    build:
+      args:
+        API_URL: ${API_URL}
+        FONTAWESOME_NPM_TOKEN: ${FONTAWESOME_NPM_TOKEN}
+      context: .
+      dockerfile: ./packages/client/Dockerfile
+    container_name: aperture-client
+    depends_on:
+      - database
+    environment:
+      PORT_CLIENT: ${PORT_CLIENT}
+    networks:
+      - frontend
+    ports:
+      - ${PORT_CLIENT}:${PORT_CLIENT}
+    restart: unless-stopped
+
   database:
     container_name: aperture-database
     environment:
@@ -7,12 +40,26 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       TZ: America/Phoenix
-    image: postgres:14.2-alpine
+    image: postgres:15.3-alpine
     ports:
       - ${PORT_DATABASE}:5432
     restart: unless-stopped
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
+
+  logger:
+    build:
+      context: .
+      dockerfile: ./packages/service-logger/Dockerfile
+    container_name: aperture-logger
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: ${DOCKER_DATABASE_URL}
+      DOMAIN: ${DOCKER_DOMAIN}
+    ports:
+      - ${PORT_SERVICE_LOGGER}:${PORT_SERVICE_LOGGER}
+    restart: unless-stopped
 
   migrations:
     command: [ '--wait', '--no-dump-schema', 'up' ]
@@ -25,31 +72,20 @@ services:
     volumes:
       - ./db:/db
 
-  service-authentication:
+  rest-api:
     build:
       context: .
-      dockerfile: ./packages/service-authentication/Dockerfile
-    container_name: aperture-service-authentication
+      dockerfile: ./packages/rest-api/Dockerfile
+    container_name: aperture-api
     depends_on:
-      - database
-      - service-logger
-    environment:
-      DATABASE_URL: ${DOCKER_DATABASE_URL}
-      DOMAIN: ${DOCKER_DOMAIN}
+      - authentication
+      - logger
+    networks:
+      - frontend
     ports:
-      - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
+      - ${PORT_API}:${PORT_API}
     restart: unless-stopped
 
-  service-logger:
-    build:
-      context: .
-      dockerfile: ./packages/service-logger/Dockerfile
-    container_name: aperture-service-logger
-    depends_on:
-      - database
-    environment:
-      DATABASE_URL: ${DOCKER_DATABASE_URL}
-      DOMAIN: ${DOCKER_DOMAIN}
-    ports:
-      - ${PORT_SERVICE_LOGGER}:${PORT_SERVICE_LOGGER}
-    restart: unless-stopped
+networks:
+  frontend:
+    driver: bridge

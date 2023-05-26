@@ -1,9 +1,17 @@
 {
   "folders": [
     {
+      "path": "packages/client"
+    },
+    {
+      "path": "packages/rest-api"
+    },
+    {
+      "name": "authentication",
       "path": "packages/service-authentication"
     },
     {
+      "name": "logger",
       "path": "packages/service-logger"
     },
     {
