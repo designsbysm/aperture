@@ -18,7 +18,7 @@ const App: React.FC = () => {
       accent: '#eb942a',
       background: '#f2f2f2',
       error: Colors.red600,
-      primary: '#0075be',
+      primary: '#f37423',
     },
     roundness: 4,
   };

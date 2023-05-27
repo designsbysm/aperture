@@ -23,8 +23,8 @@ const createStyles = () => StyleSheet.create({
     marginTop: EM * 4,
   },
   image: {
-    height: 90,
-    width: 182,
+    height: 180,
+    width: 180,
   },
 });
 
