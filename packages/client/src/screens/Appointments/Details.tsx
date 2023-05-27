@@ -1,13 +1,13 @@
-import Error from '@smaperture/error';
-import Loading from '@smaperture/loading';
 import React from 'react';
-import { EM } from '@smaperture/layout';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Platform, ScrollView, StyleSheet } from 'react-native';
 
 import CostCard from '../../components/Appointments/Details/CostCard';
+import Error from '../../components/UI/Error';
 import EventCard from '../../components/Appointments/Details/EventCard';
+import Loading from '../../components/UI/Loading';
 import ResultCard from '../../components/Appointments/Details/ResultCard';
+import { EM } from '../../components/UI/Layout';
 import { ScreenParams } from '../../navigation/Params';
 import { useGetAppointmentQuery } from '../../store/api';
 

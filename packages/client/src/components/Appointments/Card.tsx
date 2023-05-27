@@ -1,15 +1,15 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
 import { Button, Card, Colors, Divider, Paragraph } from 'react-native-paper';
-import { EM } from '@smaperture/layout';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { faFlask, faHashtag, faLocationDot } from '@fortawesome/pro-solid-svg-icons';
 import { format } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 
 import CardItem from './CardItem';
+import FontAwesomeIcon from '../UI/FA-Icon';
 import { Appointment } from '../../models';
 import { CardStatus, cardStatus } from '../../utils/appointments';
+import { EM } from '../UI/Layout';
 
 const AppointmentListCardComponent: React.FC<Props> = ({ id, date, patients, site, style }) => {
   const navigation = useNavigation();

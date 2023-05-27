@@ -1,9 +1,9 @@
-import Error from '@smaperture/error';
-import Loading from '@smaperture/loading';
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import Error from '../../components/UI/Error';
 import List from '../../components/Appointments/List';
+import Loading from '../../components/UI/Loading';
 import { useGetAppointmentsQuery } from '../../store/api';
 
 const AppointmentListScreen = () => {

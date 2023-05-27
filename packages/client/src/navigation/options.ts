@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from 'react-native-paper/lib/typescript/types';
-import { useMobileNav } from '@smaperture/layout';
 import { useTheme } from 'react-native-paper';
+
+import { useMobileNav } from '../components/UI/Layout';
 
 export const useHeaderOptions = () => {
   const theme = useTheme();

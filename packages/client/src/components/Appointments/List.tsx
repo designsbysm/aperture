@@ -1,9 +1,9 @@
 import React from 'react';
-import { EM } from '@smaperture/layout';
 import { FlatList, ListRenderItemInfo, Platform, StyleSheet } from 'react-native';
 
 import Card from './Card';
 import { Appointment } from '../../models';
+import { EM } from '../UI/Layout';
 
 const AppointmentListComponent: React.FC<{
   appointments: Appointment[];

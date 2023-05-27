@@ -1,8 +1,8 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { faBug } from '@fortawesome/pro-solid-svg-icons';
 
+import FontAwesomeIcon from '../../components/UI/FA-Icon';
 import { NavigationScreen } from '../screens/types';
 
 const renderScreen = (screen: NavigationScreen) => {

@@ -1,8 +1,8 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { faBug } from '@fortawesome/pro-solid-svg-icons';
 
+import FontAwesomeIcon from '../../components/UI/FA-Icon';
 import { NavigationScreen } from '../screens/types';
 
 const renderScreen = (screen: NavigationScreen) => {

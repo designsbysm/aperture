@@ -1,14 +1,14 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
 import { Button, Card, Colors, Divider, Subheading, Text, useTheme } from 'react-native-paper';
-import { EM } from '@smaperture/layout';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { faCircleDollar } from '@fortawesome/pro-regular-svg-icons';
 import { faBuildings, faUser } from '@fortawesome/pro-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import CardItem from '../../../components/Appointments/CardItem';
+import FontAwesomeIcon from '../../UI/FA-Icon';
 import { Appointment } from '../../../models/index';
+import { EM } from '../../UI/Layout';
 
 const AppointmentDetailcostComponent: React.FC<{
   appointment: Appointment;

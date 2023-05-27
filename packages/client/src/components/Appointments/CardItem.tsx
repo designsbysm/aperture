@@ -1,9 +1,10 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
-import { EM } from '@smaperture/layout';
 import { Divider } from 'react-native-paper';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { StyleSheet, View } from 'react-native';
+
+import FontAwesomeIcon from '../UI/FA-Icon';
+import { EM } from '../UI/Layout';
 
 const ItemHeaderComponent: React.FC<{
   icon: IconDefinition;

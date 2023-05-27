@@ -1,6 +1,7 @@
 import React from 'react';
-import { EM } from '@smaperture/layout';
 import { Image, StyleSheet, View } from 'react-native';
+
+import { EM } from '../UI/Layout';
 
 const LogoComponent: React.FC = () => {
   const styles = createStyles();

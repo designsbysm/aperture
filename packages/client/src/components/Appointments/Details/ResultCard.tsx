@@ -1,14 +1,14 @@
-import FontAwesomeIcon from '@smaperture/fa-icon';
 import React from 'react';
 import { Button, Card, Colors, Divider, Subheading, Text } from 'react-native-paper';
-import { EM } from '@smaperture/layout';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { faFlask } from '@fortawesome/pro-regular-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import CardItem from '../../../components/Appointments/CardItem';
+import FontAwesomeIcon from '../../UI/FA-Icon';
 import { Appointment } from '../../../models/index';
 import { cardStatus } from '../../../utils/appointments';
+import { EM } from '../../UI/Layout';
 
 const AppointmentDetailResultComponent: React.FC<{
   appointment: Appointment;

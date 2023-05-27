@@ -1,12 +1,13 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Text, TextInput, useTheme } from 'react-native-paper';
-import { EM } from '@smaperture/layout';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
 import { Theme } from 'react-native-paper/lib/typescript/types';
 
 import env from '../../environment';
 import Logo from '../../components/Login/Logo';
+import { EM } from '../../components/UI/Layout';
 import { ScreenParams } from '../../navigation/Params';
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
@@ -22,10 +23,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const styles = createStyles(theme);
 
   const fetchHealth = async () => {
-    const response = await fetch(`${env.apiURL}/v1/healthcheck`);
-    const healthcheck = await response.text();
-
-    console.log(healthcheck);
+    const response = await axios.get(`${env.apiURL}/v1/healthcheck`);
+    console.log(response.data)
   };
 
   useEffect(() => {
