@@ -6,10 +6,8 @@ module.exports = function (api) {
         'module:react-native-dotenv',
         {
           allowUndefined: false,
-          // safe: true,
         },
       ],
-      'react-native-reanimated/plugin',
     ],
     presets: ['babel-preset-expo'],
   };

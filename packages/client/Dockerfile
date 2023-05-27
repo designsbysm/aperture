@@ -20,6 +20,6 @@ RUN npm install --legacy-peer-deps
 
 COPY ./packages/client .
 COPY ./packages/client/.env.docker .env
-RUN npm run build:web
+RUN npx expo build:web
 
 CMD http-server web-build -p ${PORT_CLIENT}

@@ -4,12 +4,14 @@ coverage/
 dist/
 web-build/
 npm-debug.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
+yarn-error.log
+
+# *.jks
+# *.p8
+# *.p12
+# *.key
+# *.mobileprovision
+# *.orig.*
 
 # macOS
 .DS_Store
