@@ -3,8 +3,8 @@ package main
 
 import (
 	"aperture/go-libs/serverconfig"
-	"aperture/service-authentication/api"
 	"aperture/service-authentication/database"
+	"aperture/service-authentication/rpc"
 )
 
 func main() {
@@ -20,9 +20,9 @@ func main() {
 		panic(err)
 	}
 
-	api.Server()
+	// api.Server()
 
-	// if err := rpc.Server(); err != nil {
-	// 	panic(err)
-	// }
+	if err := rpc.Server(); err != nil {
+		panic(err)
+	}
 }
