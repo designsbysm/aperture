@@ -2,51 +2,30 @@ package rpc
 
 import (
 	"context"
+	"errors"
 
 	"aperture/service-authentication/authenticationpb"
 
-	"github.com/designsbysm/timber/v2"
+	"github.com/google/uuid"
 )
 
 func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {
 	username := in.GetUsername()
 	password := in.GetPassword()
 
-	// fmt.Println(username, password)
+	res := authenticationpb.LoginResponse{}
 
-	timber.Debug(username, password)
-
-	// return collatz.Hailstone(seed)
-	res := authenticationpb.LoginResponse{
-		Token:      "test",
-		Expiration: 1800,
+	if username == "" || password == "" {
+		return &res, errors.New("invalid login")
 	}
+
+	//TODO: complete login
+
+	//TODO: change access token to JWT
+	res.AccessToken = uuid.New().String()
+	res.RefreshToken = uuid.New().String()
+	res.Expiration = 1800
+	// TODO: add user info
 
 	return &res, nil
 }
-
-// syntax = "proto3";
-
-// package authentication;
-// option go_package = "/authenticationpb";
-
-// message AuthorizeRequest {
-//   string token = 1;
-//   string role = 2;
-// }
-
-// message AuthorizeResponse {
-//   bool allow = 1;
-// }
-
-// message LogoutRequest {
-//   string token = 1;
-// }
-
-// message LogoutResponse {}
-
-// service AuthenticationService {
-//   rpc Authorize(AuthorizeRequest) returns (AuthorizeResponse) {};
-//   rpc Login(LoginRequest) returns (LoginResponse) {};
-//   rpc Logout(LogoutRequest) returns (LogoutResponse) {};
-// }
