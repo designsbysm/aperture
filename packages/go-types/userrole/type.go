@@ -19,6 +19,7 @@ func (t T) IsValid() bool {
 	return false
 }
 
+// TODO: what does invalid string return
 func FromString(str string) T {
 	roles := map[string]T{
 		"admin":      Admin,

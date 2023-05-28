@@ -17,6 +17,7 @@ func (t T) IsValid() bool {
 	return false
 }
 
+// TODO: what does invalid string return?
 func FromString(str string) T {
 	levels := map[string]T{
 		"error": Error,

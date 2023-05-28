@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+// TODO: add IsValid function
+
 func Decode(t string) (jwt.MapClaims, error) {
 	token, err := jwt.Parse(t, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
