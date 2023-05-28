@@ -4,13 +4,11 @@ package authentication;
 option go_package = "/authenticationpb";
 
 message AuthorizeRequest {
-  string token = 1;
+  string accessToken = 1;
   string role = 2;
 }
 
-message AuthorizeResponse {
-  bool allow = 1;
-}
+message AuthorizeResponse { bool allow = 1; }
 
 message LoginRequest {
   string username = 1;
@@ -18,13 +16,12 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;
-  int32 expiration = 2;
+  string accessToken = 1;
+  string refreshToken = 2;
+  int32 expiration = 3;
 }
 
-message LogoutRequest {
-  string token = 1;
-}
+message LogoutRequest { string accessToken = 1; }
 
 message LogoutResponse {}
 
