@@ -3,50 +3,59 @@ package rpc
 import (
 	"context"
 
+	"aperture/go-libs/rpcclient"
+	"aperture/go-types/emailaddress"
 	"aperture/rest-api/authenticationpb"
 
-	"github.com/designsbysm/timber/v2"
+	"github.com/google/uuid"
+	"github.com/spf13/viper"
 )
 
-func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {
-	username := in.GetUsername()
-	password := in.GetPassword()
-
-	// fmt.Println(username, password)
-
-	timber.Debug(username, password)
-
-	// return collatz.Hailstone(seed)
-	res := authenticationpb.LoginResponse{
-		Token:      "test",
-		Expiration: 1800,
-	}
-
-	return &res, nil
+type authenticationResponse struct {
+	// [ ] make AccessToken type
+	AccessToken uuid.UUID `json:"accessToken"`
+	// [ ] make RefreshToken type
+	RefreshToken uuid.UUID `json:"refreshToken"`
+	Expiration   int32     `json:"expiration"`
+	// TODO: add user info
 }
 
-// syntax = "proto3";
+func Login(username emailaddress.T, password string) (authenticationResponse, error) {
+	host := viper.GetString("DOMAIN")
+	port := viper.GetString("PORT_SERVICE_AUTHENTICATION")
 
-// package authentication;
-// option go_package = "/authenticationpb";
+	connection, err := rpcclient.Run(host, port)
+	if err != nil {
+		panic(err)
+	}
+	defer connection.Close()
 
-// message AuthorizeRequest {
-//   string token = 1;
-//   string role = 2;
-// }
+	client := authenticationpb.NewAuthenticationServiceClient(connection)
 
-// message AuthorizeResponse {
-//   bool allow = 1;
-// }
+	req := authenticationpb.LoginRequest{
+		Username: string(username),
+		Password: string(password),
+	}
 
-// message LogoutRequest {
-//   string token = 1;
-// }
+	result := authenticationResponse{}
 
-// message LogoutResponse {}
+	if res, err := client.Login(context.Background(), &req); err != nil {
+		return result, err
+	} else {
+		accessToken, err := uuid.Parse(res.AccessToken)
+		if err != nil {
+			return result, err
+		}
 
-// service AuthenticationService {
-//   rpc Authorize(AuthorizeRequest) returns (AuthorizeResponse) {};
-//   rpc Login(LoginRequest) returns (LoginResponse) {};
-//   rpc Logout(LogoutRequest) returns (LogoutResponse) {};
-// }
+		refreshToken, err := uuid.Parse(res.RefreshToken)
+		if err != nil {
+			return result, err
+		}
+
+		result.AccessToken = accessToken
+		result.RefreshToken = refreshToken
+		result.Expiration = res.Expiration
+
+		return result, nil
+	}
+}
