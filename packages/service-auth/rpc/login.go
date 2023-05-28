@@ -9,23 +9,24 @@ import (
 	"github.com/google/uuid"
 )
 
+//TODO: add logging
+
 func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {
 	username := in.GetUsername()
 	password := in.GetPassword()
 
-	res := authenticationpb.LoginResponse{}
-
 	if username == "" || password == "" {
-		return &res, errors.New("invalid login")
+		return &authenticationpb.LoginResponse{}, errors.New("invalid login")
 	}
 
 	//TODO: complete login
 
-	//TODO: change access token to JWT
-	res.AccessToken = uuid.New().String()
-	res.RefreshToken = uuid.New().String()
-	res.Expiration = 1800
-	// TODO: add user info
+	res := authenticationpb.LoginResponse{
+		UserID:       uuid.New().String(),
+		AccessToken:  "jwt",
+		RefreshToken: uuid.New().String(),
+		Expiration:   1800,
+	}
 
 	return &res, nil
 }

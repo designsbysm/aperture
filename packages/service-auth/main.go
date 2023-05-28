@@ -1,4 +1,3 @@
-// TODO: add documentation
 package main
 
 import (
