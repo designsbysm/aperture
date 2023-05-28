@@ -2,7 +2,8 @@
 CREATE SCHEMA logger;
 
 CREATE TYPE logger.services AS ENUM (
-  'authentication'
+  'authentication',
+  'rest-api'
 );
 
 CREATE TYPE logger.level AS ENUM (
@@ -24,7 +25,6 @@ CREATE INDEX idx_logs_deleted_at ON logger.events USING btree (deleted_at);
 CREATE INDEX idx_logs_level ON logger.events USING btree (level);
 CREATE INDEX idx_logs_message ON logger.events USING btree (message);
 CREATE INDEX idx_logs_service ON logger.events USING btree (service);
-
 
 -- migrate:down
 DROP INDEX logger.idx_logs_deleted_at;
