@@ -16,9 +16,10 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string accessToken = 1;
-  string refreshToken = 2;
-  int32 expiration = 3;
+  string userID = 1;
+  string accessToken = 2;
+  string refreshToken = 3;
+  int32 expiration = 4;
 }
 
 message LogoutRequest { string accessToken = 1; }
