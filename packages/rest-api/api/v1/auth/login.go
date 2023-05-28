@@ -1,4 +1,4 @@
-package authentication
+package auth
 
 import (
 	"fmt"
@@ -6,14 +6,9 @@ import (
 
 	"aperture/go-types/emailaddress"
 	"aperture/go-types/loggerlevel"
-
-	// "aperture/go-types/jwt"
-
-	// "aperture/service-auth/database"
 	"aperture/rest-api/rpc"
 
 	"github.com/gin-gonic/gin"
-	// "github.com/spf13/viper"
 )
 
 type LoginRequest struct {

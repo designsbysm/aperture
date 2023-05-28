@@ -1,11 +1,11 @@
-package authentication
+package auth
 
 import (
 	"github.com/gin-gonic/gin"
 )
 
 func AddRoute(r *gin.RouterGroup) {
-	group := r.Group("/authentication")
+	group := r.Group("/auth")
 	{
 		// group.POST("/current", middleware.AuthorizeJWT(), current)
 		group.POST("/login", login)

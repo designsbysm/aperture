@@ -11,8 +11,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-// TODO: make a generic LogEvent factory function loggerservice => fn
-
 func LogEvent(level loggerlevel.T, message string) {
 	host := viper.GetString("DOMAIN")
 	port := viper.GetString("PORT_SERVICE_LOGGER")
