@@ -1,7 +1,7 @@
 package roles
 
 import (
-	"aperture/service-authentication/middleware"
+	"aperture/service-auth/middleware"
 
 	"github.com/gin-gonic/gin"
 )

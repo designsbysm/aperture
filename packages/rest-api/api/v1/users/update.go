@@ -7,8 +7,8 @@ import (
 	"aperture/go-types/emailaddress"
 	"aperture/go-types/loggerlevel"
 	"aperture/go-types/phonenumber"
-	"aperture/service-authentication/database"
-	"aperture/service-authentication/rpc"
+	"aperture/service-auth/database"
+	"aperture/service-auth/rpc"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"

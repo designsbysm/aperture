@@ -3,8 +3,8 @@ package main
 
 import (
 	"aperture/go-libs/serverconfig"
-	"aperture/service-authentication/database"
-	"aperture/service-authentication/rpc"
+	"aperture/service-auth/database"
+	"aperture/service-auth/rpc"
 )
 
 func main() {

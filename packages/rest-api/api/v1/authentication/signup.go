@@ -9,8 +9,8 @@ package authentication
 // 	"aperture/go-types/loggerlevel"
 // 	"aperture/go-types/phonenumber"
 // 	"aperture/go-types/userrole"
-// 	"aperture/service-authentication/database"
-// 	"aperture/service-authentication/rpc"
+// 	"aperture/service-auth/database"
+// 	"aperture/service-auth/rpc"
 
 // 	"github.com/gin-gonic/gin"
 // )

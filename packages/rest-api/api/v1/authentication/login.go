@@ -9,7 +9,7 @@ import (
 
 	// "aperture/go-types/jwt"
 
-	// "aperture/service-authentication/database"
+	// "aperture/service-auth/database"
 	"aperture/rest-api/rpc"
 
 	"github.com/gin-gonic/gin"

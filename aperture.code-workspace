@@ -4,11 +4,12 @@
       "path": "packages/client"
     },
     {
+      "name": "api",
       "path": "packages/rest-api"
     },
     {
-      "name": "authentication",
-      "path": "packages/service-authentication"
+      "name": "auth",
+      "path": "packages/service-auth"
     },
     {
       "name": "logger",

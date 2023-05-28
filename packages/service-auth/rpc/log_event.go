@@ -6,7 +6,7 @@ import (
 	"aperture/go-libs/rpcclient"
 	"aperture/go-types/loggerlevel"
 	"aperture/go-types/loggerservice"
-	"aperture/service-authentication/loggerpb"
+	"aperture/service-auth/loggerpb"
 
 	"github.com/spf13/viper"
 )

@@ -2,8 +2,8 @@ package roles
 
 import (
 	"aperture/go-types/loggerlevel"
-	"aperture/service-authentication/database"
-	"aperture/service-authentication/rpc"
+	"aperture/service-auth/database"
+	"aperture/service-auth/rpc"
 	"fmt"
 	"net/http"
 

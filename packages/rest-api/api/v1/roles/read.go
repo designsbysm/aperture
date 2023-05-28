@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"aperture/go-types/loggerlevel"
-	"aperture/service-authentication/database"
-	"aperture/service-authentication/rpc"
+	"aperture/service-auth/database"
+	"aperture/service-auth/rpc"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

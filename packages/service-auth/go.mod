@@ -1,4 +1,4 @@
-module aperture/service-authentication
+module aperture/service-auth
 
 go 1.19
 

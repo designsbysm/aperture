@@ -3,8 +3,8 @@ services:
   authentication:
     build:
       context: .
-      dockerfile: ./packages/service-authentication/Dockerfile
-    container_name: aperture-authentication
+      dockerfile: ./packages/service-auth/Dockerfile
+    container_name: aperture-auth
     depends_on:
       - database
       - logger
@@ -40,7 +40,7 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       TZ: America/Phoenix
-    image: postgres:15.3-alpine
+    image: postgres:14.5-alpine
     ports:
       - ${PORT_DATABASE}:5432
     restart: unless-stopped

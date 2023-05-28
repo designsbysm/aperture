@@ -6,8 +6,8 @@ package authentication
 // 	"net/http"
 
 // 	"aperture/go-types/loggerlevel"
-// 	"aperture/service-authentication/database"
-// 	"aperture/service-authentication/rpc"
+// 	"aperture/service-auth/database"
+// 	"aperture/service-auth/rpc"
 
 // 	"github.com/gin-gonic/gin"
 // 	"github.com/google/uuid"

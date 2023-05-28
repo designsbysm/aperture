@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"aperture/service-authentication/authenticationpb"
+	"aperture/service-auth/authenticationpb"
 
 	"github.com/google/uuid"
 )
