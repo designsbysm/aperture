@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"context"
+	"errors"
 
 	"aperture/go-libs/rpcclient"
 	"aperture/go-types/emailaddress"
@@ -12,12 +13,13 @@ import (
 )
 
 type authenticationResponse struct {
+	// [ ] make UserID type
 	// [ ] make AccessToken type
-	AccessToken uuid.UUID `json:"accessToken"`
 	// [ ] make RefreshToken type
+	UserID       uuid.UUID `json:"-"`
+	AccessToken  string    `json:"accessToken"`
 	RefreshToken uuid.UUID `json:"refreshToken"`
 	Expiration   int32     `json:"expiration"`
-	// TODO: add user info
 }
 
 func Login(username emailaddress.T, password string) (authenticationResponse, error) {
@@ -37,24 +39,30 @@ func Login(username emailaddress.T, password string) (authenticationResponse, er
 		Password: string(password),
 	}
 
-	result := authenticationResponse{}
-
 	if res, err := client.Login(context.Background(), &req); err != nil {
-		return result, err
+		return authenticationResponse{}, err
 	} else {
-		accessToken, err := uuid.Parse(res.AccessToken)
+		userID, err := uuid.Parse(res.UserID)
 		if err != nil {
-			return result, err
+			return authenticationResponse{}, err
 		}
+
+		if res.AccessToken == "" {
+			return authenticationResponse{}, errors.New("missing accessToken")
+		}
+		// TODO: check jwt validity
 
 		refreshToken, err := uuid.Parse(res.RefreshToken)
 		if err != nil {
-			return result, err
+			return authenticationResponse{}, err
 		}
 
-		result.AccessToken = accessToken
-		result.RefreshToken = refreshToken
-		result.Expiration = res.Expiration
+		result := authenticationResponse{
+			UserID:       userID,
+			AccessToken:  res.AccessToken,
+			RefreshToken: refreshToken,
+			Expiration:   res.Expiration,
+		}
 
 		return result, nil
 	}

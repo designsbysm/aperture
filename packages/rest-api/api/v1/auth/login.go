@@ -11,13 +11,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type LoginRequest struct {
+type loginRequest struct {
 	Username emailaddress.T
 	Password string
 }
 
 func login(c *gin.Context) {
-	req := LoginRequest{}
+	req := loginRequest{}
 	if err := c.BindJSON(&req); err != nil {
 		//nolint:errcheck
 		c.AbortWithError(http.StatusBadRequest, err)
@@ -27,10 +27,16 @@ func login(c *gin.Context) {
 	auth, err := rpc.Login(req.Username, req.Password)
 	if err != nil {
 		c.Status(http.StatusUnauthorized)
-		rpc.LogEvent(loggerlevel.Warn, fmt.Sprintf("invalid login attempt: %s", req.Username))
+
+		username := req.Username
+		if username == "" {
+			username = "<empty>"
+		}
+
+		rpc.LogEvent(loggerlevel.Warn, fmt.Sprintf("invalid login: %s", username))
 		return
 	}
 
-	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user logged in: %s", req.Username))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", auth.UserID))
 	c.JSON(http.StatusOK, auth)
 }
