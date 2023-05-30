@@ -9,11 +9,11 @@
     ]
   },
   "scripts": {
-    "db:down": "./scripts/migrate-down",
-    "db:up": "./scripts/migrate-up",
     "db:wipe": "./scripts/database-wipe",
     "docker:down": "./scripts/docker-down",
     "docker:up": "./scripts/docker-up",
+    "migrate:down": "./scripts/migrate-down",
+    "migrate:up": "./scripts/migrate-up",
     "ngrok": "ngrok http 4300 --host-header=\"localhost:4300\" --subdomain=smaperture"
   }
 }
