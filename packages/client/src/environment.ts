@@ -6,8 +6,8 @@ const environment: Environment = {
 };
 
 type Environment = {
-  apiURL: string
-  node: string
-}
+  apiURL: string;
+  node: string;
+};
 
 export default environment;

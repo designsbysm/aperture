@@ -8,7 +8,7 @@ const App = () => {
       <StartScreen />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

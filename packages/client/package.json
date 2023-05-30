@@ -4,9 +4,10 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "start": "expo start",
     "android": "expo start --android",
+    "clean:cache": "rm -fr .expo/web/cache && rm -fr $TMPDIR/metro-cache && watchman watch-del-all",
     "ios": "expo start --ios",
+    "start": "expo start",
     "web": "expo start --web"
   },
   "dependencies": {

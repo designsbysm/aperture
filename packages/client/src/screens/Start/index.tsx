@@ -7,7 +7,7 @@ import env from '../../environment';
 const StartScreen = () => {
   const fetchHealth = async () => {
     const response = await axios.get(`${env.apiURL}/v1/healthcheck`);
-    console.log('healthcheck', response.data)
+    console.log('healthcheck', response.data);
   };
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const StartScreen = () => {
       <Text>Open up App.tsx to start working on your app!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
