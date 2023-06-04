@@ -6,6 +6,8 @@ replace aperture/go-libs => ../go-libs
 
 replace aperture/go-types => ../go-types
 
+// replace github.com/designsbysm/gibson => ../../../go-modules/gibson
+
 require (
 	aperture/go-libs v0.0.0
 	aperture/go-types v0.0.0

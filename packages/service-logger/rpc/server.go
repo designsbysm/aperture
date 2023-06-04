@@ -13,12 +13,11 @@ type server struct {
 }
 
 func Server() error {
-	host := viper.GetString("RPC_HOST_SERVER")
 	port := viper.GetString("PORT_SERVICE_LOGGER")
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
 	loggerpb.RegisterLoggerServiceServer(s, &server{})
 
-	return rpcserver.Run(s, host, port)
+	return rpcserver.Run(s, "", port)
 }

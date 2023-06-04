@@ -1,6 +1,9 @@
 package healthcheck
 
 import (
+	"aperture/go-types/loggerlevel"
+	"aperture/rest-api/rpc"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -8,5 +11,8 @@ import (
 )
 
 func healthcheck(c *gin.Context) {
-	c.String(http.StatusOK, uuid.New().String())
+	id := uuid.New().String()
+
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("healthcheck: %s", id))
+	c.String(http.StatusOK, id)
 }

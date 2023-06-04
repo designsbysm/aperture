@@ -10,7 +10,10 @@ services:
       - logger
     environment:
       DATABASE_URL: ${DOCKER_DATABASE_URL}
-      DOMAIN: ${DOCKER_DOMAIN}
+    expose:
+      - ${PORT_SERVICE_AUTHENTICATION}
+    networks:
+      - backend
     ports:
       - ${PORT_SERVICE_AUTHENTICATION}:${PORT_SERVICE_AUTHENTICATION}
     restart: unless-stopped
@@ -35,6 +38,7 @@ services:
 
   database:
     container_name: aperture-database
+    command: ['-p', '${PORT_DATABASE}']
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
@@ -42,7 +46,7 @@ services:
       TZ: America/Phoenix
     image: postgres:14.5-alpine
     ports:
-      - ${PORT_DATABASE}:5432
+      - ${PORT_DATABASE}:${PORT_DATABASE}
     restart: unless-stopped
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
@@ -56,7 +60,10 @@ services:
       - database
     environment:
       DATABASE_URL: ${DOCKER_DATABASE_URL}
-      DOMAIN: ${DOCKER_DOMAIN}
+    expose:
+      - ${PORT_SERVICE_LOGGER}
+    networks:
+      - backend
     ports:
       - ${PORT_SERVICE_LOGGER}:${PORT_SERVICE_LOGGER}
     restart: unless-stopped
@@ -67,7 +74,7 @@ services:
     depends_on:
       - database
     environment:
-      DATABASE_URL: ${DOCKER_DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL}
     image: ghcr.io/amacneil/dbmate
     volumes:
       - ./db:/db
@@ -80,12 +87,17 @@ services:
     depends_on:
       - authentication
       - logger
+    environment:
+      DOMAIN: ${DOCKER_DOMAIN}
     networks:
+      - backend
       - frontend
     ports:
       - ${PORT_API}:${PORT_API}
     restart: unless-stopped
 
 networks:
+  backend:
+    driver: bridge
   frontend:
     driver: bridge

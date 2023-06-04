@@ -26,14 +26,13 @@ func login(c *gin.Context) {
 
 	auth, err := rpc.Login(req.Username, req.Password)
 	if err != nil {
-		c.Status(http.StatusUnauthorized)
-
 		username := req.Username
 		if username == "" {
 			username = "<empty>"
 		}
 
 		rpc.LogEvent(loggerlevel.Warn, fmt.Sprintf("invalid login: %s", username))
+		c.Status(http.StatusUnauthorized)
 		return
 	}
 
