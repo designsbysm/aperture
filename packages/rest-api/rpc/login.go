@@ -7,17 +7,8 @@ import (
 	"aperture/go-types/emailaddress"
 	"aperture/rest-api/authenticationpb"
 
-	"github.com/google/uuid"
 	"github.com/spf13/viper"
 )
-
-type authenticationResponse struct {
-	// [ ] make UserID type
-	// [ ] make AccessToken type
-	// [ ] make RefreshToken type
-	AccessToken  string    `json:"accessToken"`
-	RefreshToken uuid.UUID `json:"refreshToken"`
-}
 
 func Login(username emailaddress.T, password string) (*authenticationpb.LoginResponse, error) {
 	host := viper.GetString("DOMAIN")
@@ -36,4 +27,5 @@ func Login(username emailaddress.T, password string) (*authenticationpb.LoginRes
 		Password: string(password),
 	}
 
+	return client.Login(context.Background(), &req)
 }
