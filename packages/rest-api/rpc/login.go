@@ -2,7 +2,6 @@ package rpc
 
 import (
 	"context"
-	"errors"
 
 	"aperture/go-libs/rpcclient"
 	"aperture/go-types/emailaddress"
@@ -18,10 +17,9 @@ type authenticationResponse struct {
 	// [ ] make RefreshToken type
 	AccessToken  string    `json:"accessToken"`
 	RefreshToken uuid.UUID `json:"refreshToken"`
-	Expiration   int32     `json:"expiration"`
 }
 
-func Login(username emailaddress.T, password string) (authenticationResponse, error) {
+func Login(username emailaddress.T, password string) (*authenticationpb.LoginResponse, error) {
 	host := viper.GetString("DOMAIN")
 	port := viper.GetString("PORT_SERVICE_AUTHENTICATION")
 
@@ -38,25 +36,4 @@ func Login(username emailaddress.T, password string) (authenticationResponse, er
 		Password: string(password),
 	}
 
-	if res, err := client.Login(context.Background(), &req); err != nil {
-		return authenticationResponse{}, err
-	} else {
-		if res.AccessToken == "" {
-			return authenticationResponse{}, errors.New("missing accessToken")
-		}
-		// TODO: check jwt validity
-
-		refreshToken, err := uuid.Parse(res.RefreshToken)
-		if err != nil {
-			return authenticationResponse{}, err
-		}
-
-		result := authenticationResponse{
-			AccessToken:  res.AccessToken,
-			RefreshToken: refreshToken,
-			Expiration:   res.Expiration,
-		}
-
-		return result, nil
-	}
 }
