@@ -36,6 +36,8 @@ func login(c *gin.Context) {
 		return
 	}
 
-	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", auth.UserID))
+	// TODO: get user id from jwt
+	userID := "get from jwt"
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", userID))
 	c.JSON(http.StatusOK, auth)
 }

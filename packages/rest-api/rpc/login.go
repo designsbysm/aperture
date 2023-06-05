@@ -16,7 +16,6 @@ type authenticationResponse struct {
 	// [ ] make UserID type
 	// [ ] make AccessToken type
 	// [ ] make RefreshToken type
-	UserID       uuid.UUID `json:"-"`
 	AccessToken  string    `json:"accessToken"`
 	RefreshToken uuid.UUID `json:"refreshToken"`
 	Expiration   int32     `json:"expiration"`
@@ -42,11 +41,6 @@ func Login(username emailaddress.T, password string) (authenticationResponse, er
 	if res, err := client.Login(context.Background(), &req); err != nil {
 		return authenticationResponse{}, err
 	} else {
-		userID, err := uuid.Parse(res.UserID)
-		if err != nil {
-			return authenticationResponse{}, err
-		}
-
 		if res.AccessToken == "" {
 			return authenticationResponse{}, errors.New("missing accessToken")
 		}
@@ -58,7 +52,6 @@ func Login(username emailaddress.T, password string) (authenticationResponse, er
 		}
 
 		result := authenticationResponse{
-			UserID:       userID,
 			AccessToken:  res.AccessToken,
 			RefreshToken: refreshToken,
 			Expiration:   res.Expiration,
