@@ -22,7 +22,6 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	//TODO: complete login
 
 	res := authenticationpb.LoginResponse{
-		UserID:       uuid.New().String(),
 		AccessToken:  "jwt",
 		RefreshToken: uuid.New().String(),
 		Expiration:   1800,

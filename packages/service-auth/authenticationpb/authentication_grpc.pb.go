@@ -25,6 +25,7 @@ type AuthenticationServiceClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
+	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error)
 }
 
 type authenticationServiceClient struct {
@@ -62,6 +63,15 @@ func (c *authenticationServiceClient) Logout(ctx context.Context, in *LogoutRequ
 	return out, nil
 }
 
+func (c *authenticationServiceClient) Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error) {
+	out := new(RefreshResponse)
+	err := c.cc.Invoke(ctx, "/authentication.AuthenticationService/Refresh", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthenticationServiceServer is the server API for AuthenticationService service.
 // All implementations must embed UnimplementedAuthenticationServiceServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type AuthenticationServiceServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
+	Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error)
 	mustEmbedUnimplementedAuthenticationServiceServer()
 }
 
@@ -84,6 +95,9 @@ func (UnimplementedAuthenticationServiceServer) Login(context.Context, *LoginReq
 }
 func (UnimplementedAuthenticationServiceServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
+}
+func (UnimplementedAuthenticationServiceServer) Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
 func (UnimplementedAuthenticationServiceServer) mustEmbedUnimplementedAuthenticationServiceServer() {}
 
@@ -152,6 +166,24 @@ func _AuthenticationService_Logout_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthenticationService_Refresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthenticationServiceServer).Refresh(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/authentication.AuthenticationService/Refresh",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthenticationServiceServer).Refresh(ctx, req.(*RefreshRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthenticationService_ServiceDesc is the grpc.ServiceDesc for AuthenticationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +202,10 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Logout",
 			Handler:    _AuthenticationService_Logout_Handler,
+		},
+		{
+			MethodName: "Refresh",
+			Handler:    _AuthenticationService_Refresh_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
