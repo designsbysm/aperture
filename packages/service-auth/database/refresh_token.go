@@ -8,15 +8,20 @@ import (
 )
 
 type RefreshToken struct {
-	ID        uuid.UUID
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *gorm.DeletedAt
-	UserID    uuid.UUID
+	ID           int
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+	DeletedAt    *gorm.DeletedAt
+	UserID       uuid.UUID
+	RefreshToken uuid.UUID
 }
 
 func (t *RefreshToken) Create() error {
 	return DB.Create(&t).Error
+}
+
+func (t *RefreshToken) DeleteAll(userID uuid.UUID) error {
+	return DB.Where("user_id = ?", userID.String()).Delete(&t).Error
 }
 
 func (t *RefreshToken) Delete() error {
