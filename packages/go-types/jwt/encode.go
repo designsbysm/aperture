@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Encode(id uuid.UUID, role userrole.T, longLived bool) (string, error) {
+func Encode(id uuid.UUID, role userrole.T, firstName string, lastName string, longLived bool) (string, error) {
 	defaulDuration := viper.GetInt("jwt.expiration")
 	if longLived {
 		defaulDuration = viper.GetInt("jwt.longLived.expiration")
@@ -18,9 +18,11 @@ func Encode(id uuid.UUID, role userrole.T, longLived bool) (string, error) {
 	expiration := time.Now().Add(time.Minute * time.Duration(defaulDuration)).Unix()
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"userID":   id,
-		"userRole": role,
-		"exp":      expiration,
+		"userID":    id,
+		"userRole":  role,
+		"firstName": firstName,
+		"lastName":  lastName,
+		"exp":       expiration,
 	})
 
 	secretKey := []byte(viper.GetString("jwt.secret"))
