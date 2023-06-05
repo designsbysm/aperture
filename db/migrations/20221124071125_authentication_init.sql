@@ -27,7 +27,7 @@ CREATE TYPE authentication.user_role AS ENUM (
 CREATE TABLE authentication.roles (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
   created_at timestamp with time zone DEFAULT now() NOT NULL,
-  updated_at timestamp with time zone,
+  updated_at timestamp with time zone DEFAULT now() NOT NULL,
   deleted_at timestamp with time zone,
   user_id uuid NOT NULL,
   role authentication.user_role DEFAULT 'user'::authentication.user_role NOT NULL,
@@ -37,23 +37,25 @@ CREATE INDEX idx_roles_deleted_at ON authentication.roles USING btree (deleted_a
 CREATE UNIQUE INDEX idx_roles_user_id_fkey ON authentication.roles USING btree (user_id);
 
 CREATE TABLE authentication.refresh_tokens (
-  id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
+  id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
   created_at timestamp with time zone DEFAULT now() NOT NULL,
-  updated_at timestamp with time zone,
+  updated_at timestamp with time zone DEFAULT now() NOT NULL,
   deleted_at timestamp with time zone,
   user_id uuid NOT NULL,
+  refresh_token uuid NOT NULL,
   FOREIGN KEY (user_id) REFERENCES authentication.users(id)
 );
 CREATE INDEX idx_refresh_tokens_deleted_at ON authentication.refresh_tokens USING btree (deleted_at);
 CREATE INDEX idx_refresh_tokens_user_id_fkey ON authentication.refresh_tokens USING btree (user_id);
+CREATE UNIQUE INDEX idx_refresh_tokens_refresh_token_fkey ON authentication.refresh_tokens USING btree (refresh_token);
 
 CREATE TABLE authentication.access_token_refreshes (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
   created_at timestamp with time zone DEFAULT now() NOT NULL,
-  updated_at timestamp with time zone,
+  updated_at timestamp with time zone DEFAULT now() NOT NULL,
   deleted_at timestamp with time zone,
   refresh_token uuid NOT NULL,
-  FOREIGN KEY (refresh_token) REFERENCES authentication.refresh_tokens(id)
+  FOREIGN KEY (refresh_token) REFERENCES authentication.refresh_tokens(refresh_token)
 );
 CREATE INDEX idx_access_token_refreshes_deleted_at ON authentication.access_token_refreshes USING btree (deleted_at);
 CREATE INDEX idx_access_token_refreshes_refresh_token_fkey ON authentication.access_token_refreshes USING btree (refresh_token);
@@ -63,6 +65,7 @@ DROP INDEX authentication.idx_access_token_refreshes_deleted_at;
 DROP INDEX authentication.idx_access_token_refreshes_refresh_token_fkey;
 DROP TABLE authentication.access_token_refreshes;
 
+DROP INDEX authentication.idx_refresh_tokens_refresh_token_fkey;
 DROP INDEX authentication.idx_refresh_tokens_deleted_at;
 DROP INDEX authentication.idx_refresh_tokens_user_id_fkey;
 DROP TABLE authentication.refresh_tokens;

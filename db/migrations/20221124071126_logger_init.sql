@@ -15,7 +15,7 @@ CREATE TYPE logger.level AS ENUM (
 CREATE TABLE logger.events (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
   created_at timestamp with time zone DEFAULT now() NOT NULL,
-  updated_at timestamp with time zone,
+  updated_at timestamp with time zone DEFAULT now() NOT NULL,
   deleted_at timestamp with time zone,
   service logger.services NOT NULL,
   level logger.level NOT NULL,

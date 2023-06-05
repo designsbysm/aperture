@@ -21,11 +21,11 @@ BEGIN
     'admin'
   );
 
-  INSERT INTO authentication.refresh_tokens (id, updated_at, user_id)
+  INSERT INTO authentication.refresh_tokens (updated_at, user_id, refresh_token)
   VALUES(
-    '5ae3bba3-b5ab-4b94-a768-9a61fc4a4c50',
     now(),
-    user_id
+    user_id,
+    '5ae3bba3-b5ab-4b94-a768-9a61fc4a4c50'
   );
 END $$;
 
