@@ -1,11 +1,12 @@
 {
   "folders": [
     {
+      "name": "client",
       "path": "packages/client"
     },
     {
-      "name": "api",
-      "path": "packages/rest-api"
+      "name": "gateway",
+      "path": "packages/gateway"
     },
     {
       "name": "auth",
@@ -16,20 +17,24 @@
       "path": "packages/service-logger"
     },
     {
+      "name": "go-libs",
       "path": "packages/go-libs"
     },
     {
+      "name": "go-types",
       "path": "packages/go-types"
     },
     {
+      "name": "migrations",
       "path": "db/migrations"
     },
     {
+      "name": "protobufs",
       "path": "packages/protobufs"
     },
     {
       "name": "root",
       "path": "."
-    },
+    }
   ]
 }

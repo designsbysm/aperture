@@ -1,0 +1,7 @@
+go 1.20
+
+use (
+	./packages/gateway
+	./packages/go-libs
+	./packages/go-types
+)

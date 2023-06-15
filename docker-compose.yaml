@@ -51,6 +51,23 @@ services:
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
 
+  gateway:
+    build:
+      context: .
+      dockerfile: ./packages/gateway/Dockerfile
+    container_name: aperture-gateway
+    depends_on:
+      - authentication
+      - logger
+    environment:
+      DOMAIN: ${DOCKER_DOMAIN}
+    networks:
+      - backend
+      - frontend
+    ports:
+      - ${PORT_API}:${PORT_API}
+    restart: unless-stopped
+
   logger:
     build:
       context: .
@@ -78,23 +95,6 @@ services:
     image: ghcr.io/amacneil/dbmate
     volumes:
       - ./db:/db
-
-  gateway:
-    build:
-      context: .
-      dockerfile: ./packages/gateway/Dockerfile
-    container_name: aperture-gateway
-    depends_on:
-      - authentication
-      - logger
-    environment:
-      DOMAIN: ${DOCKER_DOMAIN}
-    networks:
-      - backend
-      - frontend
-    ports:
-      - ${PORT_API}:${PORT_API}
-    restart: unless-stopped
 
 networks:
   backend:
