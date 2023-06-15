@@ -1,7 +1,7 @@
 package api
 
 import (
-	v1 "aperture/rest-api/api/v1"
+	v1 "aperture/gateway/api/v1"
 
 	"github.com/designsbysm/gibson"
 	"github.com/gin-gonic/gin"

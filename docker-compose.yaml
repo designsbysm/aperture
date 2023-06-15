@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   authentication:
     build:
@@ -69,7 +69,7 @@ services:
     restart: unless-stopped
 
   migrations:
-    command: [ '--wait', '--no-dump-schema', 'up' ]
+    command: ['--wait', '--no-dump-schema', 'up']
     container_name: aperture-migrations
     depends_on:
       - database
@@ -79,11 +79,11 @@ services:
     volumes:
       - ./db:/db
 
-  rest-api:
+  gateway:
     build:
       context: .
-      dockerfile: ./packages/rest-api/Dockerfile
-    container_name: aperture-api
+      dockerfile: ./packages/gateway/Dockerfile
+    container_name: aperture-gateway
     depends_on:
       - authentication
       - logger

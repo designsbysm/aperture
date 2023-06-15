@@ -3,10 +3,10 @@ package rpc
 import (
 	"context"
 
+	"aperture/gateway/loggerpb"
 	"aperture/go-libs/rpcclient"
 	"aperture/go-types/loggerlevel"
 	"aperture/go-types/loggerservice"
-	"aperture/rest-api/loggerpb"
 
 	"github.com/spf13/viper"
 )

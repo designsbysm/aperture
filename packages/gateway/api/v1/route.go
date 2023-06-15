@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"aperture/rest-api/api/v1/appointments"
-	"aperture/rest-api/api/v1/auth"
-	"aperture/rest-api/api/v1/healthcheck"
+	"aperture/gateway/api/v1/appointments"
+	"aperture/gateway/api/v1/auth"
+	"aperture/gateway/api/v1/healthcheck"
 
 	"github.com/gin-gonic/gin"
 )

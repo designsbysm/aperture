@@ -8,7 +8,7 @@ COPY ./packages/go-types .
 
 WORKDIR /go/src/server
 COPY .env .
-COPY ./packages/rest-api .
+COPY ./packages/gateway .
 RUN rm config.yaml
 RUN mv config.prod.yaml config.yaml
 

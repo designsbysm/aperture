@@ -1,4 +1,4 @@
-module aperture/rest-api
+module aperture/gateway
 
 go 1.19
 

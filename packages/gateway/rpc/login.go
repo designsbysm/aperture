@@ -3,9 +3,9 @@ package rpc
 import (
 	"context"
 
+	"aperture/gateway/authenticationpb"
 	"aperture/go-libs/rpcclient"
 	"aperture/go-types/emailaddress"
-	"aperture/rest-api/authenticationpb"
 
 	"github.com/spf13/viper"
 )

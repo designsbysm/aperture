@@ -1,8 +1,8 @@
 package main
 
 import (
+	"aperture/gateway/api"
 	"aperture/go-libs/serverconfig"
-	"aperture/rest-api/api"
 )
 
 func main() {

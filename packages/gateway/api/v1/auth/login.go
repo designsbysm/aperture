@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"aperture/gateway/rpc"
 	"aperture/go-types/emailaddress"
 	"aperture/go-types/loggerlevel"
-	"aperture/rest-api/rpc"
 
 	"github.com/gin-gonic/gin"
 )

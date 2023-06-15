@@ -1,8 +1,8 @@
 package healthcheck
 
 import (
+	"aperture/gateway/rpc"
 	"aperture/go-types/loggerlevel"
-	"aperture/rest-api/rpc"
 	"fmt"
 	"net/http"
 
