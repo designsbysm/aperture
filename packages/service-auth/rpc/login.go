@@ -47,13 +47,6 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	}
 
 	refreshToken := database.RefreshToken{
-		UserID: user.ID,
-	}
-	if err := refreshToken.DeleteAll(user.ID); err != nil {
-		return &authenticationpb.LoginResponse{}, errors.New("unable to remove old refresh tokens")
-	}
-
-	refreshToken = database.RefreshToken{
 		UserID:       user.ID,
 		RefreshToken: uuid.New(),
 	}
