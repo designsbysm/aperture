@@ -4,4 +4,6 @@ use (
 	./packages/gateway
 	./packages/go-libs
 	./packages/go-types
+	./packages/service-auth
+	./packages/service-logger
 )
