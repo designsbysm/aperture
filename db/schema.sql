@@ -24,6 +24,13 @@ CREATE SCHEMA logger;
 
 
 --
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+--
 -- Name: user_role; Type: TYPE; Schema: authentication; Owner: -
 --
 
@@ -93,26 +100,11 @@ ALTER TABLE authentication.access_token_refreshes ALTER COLUMN id ADD GENERATED 
 --
 
 CREATE TABLE authentication.refresh_tokens (
-    id integer NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     deleted_at timestamp with time zone,
-    user_id uuid NOT NULL,
-    refresh_token uuid NOT NULL
-);
-
-
---
--- Name: refresh_tokens_id_seq; Type: SEQUENCE; Schema: authentication; Owner: -
---
-
-ALTER TABLE authentication.refresh_tokens ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME authentication.refresh_tokens_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
+    user_id uuid NOT NULL
 );
 
 
@@ -269,13 +261,6 @@ CREATE INDEX idx_refresh_tokens_deleted_at ON authentication.refresh_tokens USIN
 
 
 --
--- Name: idx_refresh_tokens_refresh_token_fkey; Type: INDEX; Schema: authentication; Owner: -
---
-
-CREATE UNIQUE INDEX idx_refresh_tokens_refresh_token_fkey ON authentication.refresh_tokens USING btree (refresh_token);
-
-
---
 -- Name: idx_refresh_tokens_user_id_fkey; Type: INDEX; Schema: authentication; Owner: -
 --
 
@@ -350,7 +335,7 @@ CREATE INDEX idx_logs_service ON logger.events USING btree (service);
 --
 
 ALTER TABLE ONLY authentication.access_token_refreshes
-    ADD CONSTRAINT access_token_refreshes_refresh_token_fkey FOREIGN KEY (refresh_token) REFERENCES authentication.refresh_tokens(refresh_token);
+    ADD CONSTRAINT access_token_refreshes_refresh_token_fkey FOREIGN KEY (refresh_token) REFERENCES authentication.refresh_tokens(id);
 
 
 --

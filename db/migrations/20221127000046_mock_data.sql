@@ -1,7 +1,7 @@
 -- migrate:up
 DO $$
 DECLARE
-  user_id uuid = '32cc62f0-292e-4349-9919-db2088ff22da';
+  user_id uuid = '0188f677-d7e4-7518-9a29-a6697234d61c';
 BEGIN
   INSERT INTO authentication.users (id, updated_at, first_name, last_name, mobile, email, PASSWORD)
   VALUES(
@@ -21,11 +21,11 @@ BEGIN
     'admin'
   );
 
-  INSERT INTO authentication.refresh_tokens (updated_at, user_id, refresh_token)
+  INSERT INTO authentication.refresh_tokens (id, updated_at, user_id)
   VALUES(
+    '0188f678-4f36-7518-a307-fbfb4ee5188a',
     now(),
-    user_id,
-    '5ae3bba3-b5ab-4b94-a768-9a61fc4a4c50'
+    user_id
   );
 END $$;
 
