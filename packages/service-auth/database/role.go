@@ -5,7 +5,7 @@ import (
 
 	"aperture/go-types/userrole"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 	"gorm.io/gorm"
 )
 

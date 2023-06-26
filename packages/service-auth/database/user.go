@@ -7,7 +7,7 @@ import (
 	"aperture/go-types/emailaddress"
 	"aperture/go-types/phonenumber"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

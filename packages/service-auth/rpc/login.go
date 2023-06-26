@@ -9,7 +9,7 @@ import (
 	"aperture/service-auth/authenticationpb"
 	"aperture/service-auth/database"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 )
 
 //TODO: add logging
@@ -46,9 +46,14 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		return &authenticationpb.LoginResponse{}, errors.New("unable to create accessToken")
 	}
 
+	token, err := uuid.NewV7()
+	if err != nil {
+		return &authenticationpb.LoginResponse{}, errors.New("unable to create uuid")
+	}
+
 	refreshToken := database.RefreshToken{
-		UserID:       user.ID,
-		RefreshToken: uuid.New(),
+		ID:     token,
+		UserID: user.ID,
 	}
 	if err := refreshToken.Create(); err != nil {
 		return &authenticationpb.LoginResponse{}, errors.New("unable to create refreshToken")
@@ -56,7 +61,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 
 	res := authenticationpb.LoginResponse{
 		AccessToken:  accessToken,
-		RefreshToken: refreshToken.RefreshToken.String(),
+		RefreshToken: refreshToken.ID.String(),
 	}
 
 	return &res, nil

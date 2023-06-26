@@ -3,17 +3,16 @@ package database
 import (
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 	"gorm.io/gorm"
 )
 
 type RefreshToken struct {
-	ID           int
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	DeletedAt    *gorm.DeletedAt
-	UserID       uuid.UUID
-	RefreshToken uuid.UUID
+	ID        uuid.UUID
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *gorm.DeletedAt
+	UserID    uuid.UUID
 }
 
 func (t *RefreshToken) Create() error {
