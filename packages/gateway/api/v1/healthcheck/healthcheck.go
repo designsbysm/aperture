@@ -7,12 +7,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 )
 
 func healthcheck(c *gin.Context) {
-	id := uuid.New().String()
+	id, _ := uuid.NewV7()
 
 	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("healthcheck: %s", id))
-	c.String(http.StatusOK, id)
+	c.String(http.StatusOK, id.String())
 }

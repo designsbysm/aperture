@@ -11,7 +11,7 @@ package roles
 // 	"aperture/service-auth/rpc"
 
 // 	"github.com/gin-gonic/gin"
-// 	"github.com/google/uuid"
+// 	"github.com/gofrs/uuid"
 // 	"gorm.io/gorm"
 // )
 

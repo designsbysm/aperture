@@ -5,25 +5,29 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 )
 
 func readAll(c *gin.Context) {
 	time.Sleep(1 * time.Second)
 
+	id1, _ := uuid.NewV7()
+	id2, _ := uuid.NewV7()
+	id3, _ := uuid.NewV7()
+
 	appointments := []Appointment{
 		{
-			ID:     uuid.New(),
+			ID:     id1,
 			Date:   time.Now(),
 			Status: "Pending",
 		},
 		{
-			ID:     uuid.New(),
+			ID:     id2,
 			Date:   time.Now(),
 			Status: "Negative",
 		},
 		{
-			ID:     uuid.New(),
+			ID:     id3,
 			Date:   time.Now(),
 			Status: "Positive",
 		},

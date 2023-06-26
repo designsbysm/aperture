@@ -8,7 +8,7 @@ import (
 	"aperture/go-types/jwt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 )
 
 func AuthorizeJWT() gin.HandlerFunc {
@@ -29,7 +29,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 			return
 		}
 
-		id, err := uuid.Parse(claims["userID"].(string))
+		id, err := uuid.FromString(claims["userID"].(string))
 		if err != nil {
 			//nolint:errcheck
 			c.AbortWithError(http.StatusInternalServerError, err)
