@@ -5,8 +5,8 @@ import (
 
 	"aperture/go-types/userrole"
 
+	"github.com/gofrs/uuid"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/google/uuid"
 	"github.com/spf13/viper"
 )
 
