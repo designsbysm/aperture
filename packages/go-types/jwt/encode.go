@@ -11,9 +11,9 @@ import (
 )
 
 func Encode(id uuid.UUID, role userrole.T, firstName string, lastName string, longLived bool) (string, error) {
-	defaulDuration := viper.GetInt("jwt.expiration")
+	defaulDuration := viper.GetInt("jwt.expirationMintues")
 	if longLived {
-		defaulDuration = viper.GetInt("jwt.longLived.expiration")
+		defaulDuration = viper.GetInt("jwt.longLived.expirationMintues")
 	}
 	expiration := time.Now().Add(time.Minute * time.Duration(defaulDuration)).Unix()
 
