@@ -12,6 +12,7 @@ import (
 	"aperture/service-auth/database"
 
 	"github.com/gofrs/uuid"
+	"github.com/spf13/viper"
 )
 
 func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {
@@ -48,12 +49,17 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
 
-	// TODO: long live tokens
-	accessToken, err := jwt.Encode(user.ID, role.Role, user.FirstName, user.LastName, false)
+	userToken := in.GetLongLivedToken()
+	secretToken := viper.GetString("jwt.longLived.secret")
+	isLongLived := userToken != "" && secretToken != "" && userToken == secretToken
+	accessToken, err := jwt.Encode(user.ID, role.Role, user.FirstName, user.LastName, isLongLived)
 	if err != nil {
 		msg := "unable to create accessToken"
 		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
+	} else if isLongLived {
+		msg := fmt.Sprintf("long lived jwt created for %s:", user.ID)
+		LogEvent(loggerlevel.Info, msg)
 	}
 
 	token, err := uuid.NewV7()
