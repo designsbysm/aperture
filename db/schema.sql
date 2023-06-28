@@ -24,13 +24,6 @@ CREATE SCHEMA logger;
 
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
---
 -- Name: user_role; Type: TYPE; Schema: authentication; Owner: -
 --
 
