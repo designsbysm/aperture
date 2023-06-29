@@ -17,6 +17,8 @@ type loginRequest struct {
 }
 
 func login(c *gin.Context) {
+	rpc.LogEvent(loggerlevel.Info, "login request")
+
 	req := loginRequest{}
 	if err := c.BindJSON(&req); err != nil {
 		//nolint:errcheck
@@ -24,7 +26,9 @@ func login(c *gin.Context) {
 		return
 	}
 
-	auth, err := rpc.Login(req.Username, req.Password)
+	key := http.CanonicalHeaderKey("long-lived-token")
+	userToken := c.GetHeader(key)
+	auth, err := rpc.Login(req.Username, req.Password, userToken)
 	if err != nil {
 		username := req.Username
 		if username == "" {
@@ -36,8 +40,6 @@ func login(c *gin.Context) {
 		return
 	}
 
-	// TODO: get user id from jwt
-	userID := "get from jwt"
-	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", userID))
+	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", req.Username))
 	c.JSON(http.StatusOK, auth)
 }

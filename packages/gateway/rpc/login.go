@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Login(username emailaddress.T, password string) (*authenticationpb.LoginResponse, error) {
+func Login(username emailaddress.T, password string, longLivedToken string) (*authenticationpb.LoginResponse, error) {
 	host := viper.GetString("DOMAIN")
 	port := viper.GetString("PORT_SERVICE_AUTHENTICATION")
 
@@ -23,8 +23,9 @@ func Login(username emailaddress.T, password string) (*authenticationpb.LoginRes
 	client := authenticationpb.NewAuthenticationServiceClient(connection)
 
 	req := authenticationpb.LoginRequest{
-		Username: string(username),
-		Password: string(password),
+		Username:       string(username),
+		Password:       password,
+		LongLivedToken: longLivedToken,
 	}
 
 	return client.Login(context.Background(), &req)
