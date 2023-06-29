@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"aperture/service-auth/authenticationpb"
+	"aperture/libs/authenticationpb"
 	"aperture/service-auth/database"
 	"aperture/types/emailaddress"
 	"aperture/types/jwt"
