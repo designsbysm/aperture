@@ -25,6 +25,9 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
 
+	msg := fmt.Sprintf("start login rpc: %s", username)
+	LogEvent(loggerlevel.Info, msg)
+
 	user := database.User{
 		Email: emailaddress.T(username),
 	}
@@ -44,7 +47,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		UserID: user.ID,
 	}
 	if err := role.Read(); err != nil {
-		msg := fmt.Sprintf("role not found for %s:", user.ID)
+		msg := fmt.Sprintf("role not found for: %s", user.ID)
 		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
@@ -58,7 +61,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	} else if isLongLived {
-		msg := fmt.Sprintf("long lived jwt created for %s:", user.ID)
+		msg := fmt.Sprintf("long lived jwt created for: %s", user.ID)
 		LogEvent(loggerlevel.Info, msg)
 	}
 
@@ -74,7 +77,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		UserID: user.ID,
 	}
 	if err := refreshToken.Create(); err != nil {
-		msg := fmt.Sprintf("unable to create refreshToken for %s:", user.ID)
+		msg := fmt.Sprintf("unable to create refreshToken for: %s", user.ID)
 		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
@@ -84,7 +87,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		RefreshToken: refreshToken.ID.String(),
 	}
 
-	msg := fmt.Sprintf("login successful: %s", user.ID)
+	msg = fmt.Sprintf("complete login rpc: %s", user.ID)
 	LogEvent(loggerlevel.Info, msg)
 	return &res, nil
 }
