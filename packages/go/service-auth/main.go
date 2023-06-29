@@ -19,8 +19,6 @@ func main() {
 		panic(err)
 	}
 
-	// api.Server()
-
 	if err := rpc.Server(); err != nil {
 		panic(err)
 	}

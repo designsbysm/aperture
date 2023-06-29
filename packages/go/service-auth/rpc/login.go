@@ -9,6 +9,7 @@ import (
 	"aperture/service-auth/database"
 	"aperture/types/emailaddress"
 	"aperture/types/jwt"
+	"aperture/types/loggerlevel"
 
 	"github.com/designsbysm/timber/v2"
 	"github.com/gofrs/uuid"
@@ -18,6 +19,10 @@ import (
 func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*authenticationpb.LoginResponse, error) {
 	username := in.GetUsername()
 	password := in.GetPassword()
+
+	msg := fmt.Sprintf("start login: %s", username)
+	timber.Info(msg)
+	LogEvent(loggerlevel.Info, msg)
 
 	if username == "" || password == "" {
 		return &authenticationpb.LoginResponse{}, errors.New("invalid login")
@@ -50,8 +55,9 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	if err != nil {
 		return &authenticationpb.LoginResponse{}, errors.New("unable to create accessToken")
 	} else if isLongLived {
-		msg := fmt.Sprintf("long lived jwt created for: %s", user.ID)
+		msg := fmt.Sprintf("long lived jwt: %s", user.ID)
 		timber.Info(msg)
+		LogEvent(loggerlevel.Info, msg)
 	}
 
 	token, err := uuid.NewV7()
@@ -73,7 +79,8 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		RefreshToken: refreshToken.ID.String(),
 	}
 
-	msg := fmt.Sprintf("complete login rpc: %s", user.ID)
+	msg = fmt.Sprintf("complete login: %s", user.ID)
 	timber.Info(msg)
+	LogEvent(loggerlevel.Info, msg)
 	return &res, nil
 }
