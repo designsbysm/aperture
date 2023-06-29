@@ -7,10 +7,10 @@ import (
 
 	"aperture/go-types/emailaddress"
 	"aperture/go-types/jwt"
-	"aperture/go-types/loggerlevel"
 	"aperture/service-auth/authenticationpb"
 	"aperture/service-auth/database"
 
+	"github.com/designsbysm/timber/v2"
 	"github.com/gofrs/uuid"
 	"github.com/spf13/viper"
 )
@@ -20,27 +20,19 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	password := in.GetPassword()
 
 	if username == "" || password == "" {
-		msg := "invalid login"
-		LogEvent(loggerlevel.Error, msg)
-		return &authenticationpb.LoginResponse{}, errors.New(msg)
+		return &authenticationpb.LoginResponse{}, errors.New("invalid login")
 	}
-
-	msg := fmt.Sprintf("start login rpc: %s", username)
-	LogEvent(loggerlevel.Info, msg)
 
 	user := database.User{
 		Email: emailaddress.T(username),
 	}
 	if err := user.Read(); err != nil {
 		msg := fmt.Sprintf("user not found: %s", username)
-		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
 
 	if err := user.PasswordValidate(password); err != nil {
-		msg := "invalid password"
-		LogEvent(loggerlevel.Error, msg)
-		return &authenticationpb.LoginResponse{}, errors.New(msg)
+		return &authenticationpb.LoginResponse{}, errors.New("invalid password")
 	}
 
 	role := database.Role{
@@ -48,7 +40,6 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	}
 	if err := role.Read(); err != nil {
 		msg := fmt.Sprintf("role not found for: %s", user.ID)
-		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
 
@@ -57,19 +48,15 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	isLongLived := userToken != "" && secretToken != "" && userToken == secretToken
 	accessToken, err := jwt.Encode(user.ID, role.Role, user.FirstName, user.LastName, isLongLived)
 	if err != nil {
-		msg := "unable to create accessToken"
-		LogEvent(loggerlevel.Error, msg)
-		return &authenticationpb.LoginResponse{}, errors.New(msg)
+		return &authenticationpb.LoginResponse{}, errors.New("unable to create accessToken")
 	} else if isLongLived {
 		msg := fmt.Sprintf("long lived jwt created for: %s", user.ID)
-		LogEvent(loggerlevel.Info, msg)
+		timber.Info(msg)
 	}
 
 	token, err := uuid.NewV7()
 	if err != nil {
-		msg := "unable to create uuid"
-		LogEvent(loggerlevel.Error, msg)
-		return &authenticationpb.LoginResponse{}, errors.New(msg)
+		return &authenticationpb.LoginResponse{}, errors.New("unable to create uuid")
 	}
 
 	refreshToken := database.RefreshToken{
@@ -78,7 +65,6 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 	}
 	if err := refreshToken.Create(); err != nil {
 		msg := fmt.Sprintf("unable to create refreshToken for: %s", user.ID)
-		LogEvent(loggerlevel.Error, msg)
 		return &authenticationpb.LoginResponse{}, errors.New(msg)
 	}
 
@@ -87,7 +73,7 @@ func (*server) Login(ctx context.Context, in *authenticationpb.LoginRequest) (*a
 		RefreshToken: refreshToken.ID.String(),
 	}
 
-	msg = fmt.Sprintf("complete login rpc: %s", user.ID)
-	LogEvent(loggerlevel.Info, msg)
+	msg := fmt.Sprintf("complete login rpc: %s", user.ID)
+	timber.Info(msg)
 	return &res, nil
 }
