@@ -9,6 +9,10 @@
       "path": "packages/gateway"
     },
     {
+      "name": "postgraphile",
+      "path": "packages/postgraphile"
+    },
+    {
       "name": "auth",
       "path": "packages/service-auth"
     },

@@ -3,3 +3,5 @@ packages/*/node_modules
 packages/client/.expo
 packages/client/web-build
 
+packages/postgraphile/build
+

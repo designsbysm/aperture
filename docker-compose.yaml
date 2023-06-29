@@ -98,6 +98,22 @@ services:
     volumes:
       - ./db:/db
 
+  graphql:
+    build:
+      context: .
+      dockerfile: ./packages/postgraphile/Dockerfile
+    container_name: aperture-graphql
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: ${DOCKER_DATABASE_URL}
+      PORT_GRAPHQL: ${PORT_GRAPHQL}
+    networks:
+      - backend
+    ports:
+      - ${PORT_GRAPHQL}:${PORT_GRAPHQL}
+    restart: unless-stopped
+
 networks:
   backend:
     driver: bridge
