@@ -3,7 +3,7 @@ package rpc
 import (
 	"context"
 
-	"aperture/gateway/authenticationpb"
+	"aperture/libs/authenticationpb"
 	"aperture/libs/rpcclient"
 	"aperture/types/emailaddress"
 

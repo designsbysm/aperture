@@ -3,7 +3,7 @@ package rpc
 import (
 	"context"
 
-	"aperture/gateway/loggerpb"
+	"aperture/libs/loggerpb"
 	"aperture/libs/rpcclient"
 	"aperture/types/loggerlevel"
 	"aperture/types/loggerservice"
