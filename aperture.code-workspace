@@ -2,39 +2,38 @@
   "folders": [
     {
       "name": "client",
-      "path": "packages/client"
+      "path": "packages/js/client"
     },
     {
       "name": "gateway",
-      "path": "packages/gateway"
+      "path": "packages/go/gateway"
     },
     {
       "name": "postgraphile",
-      "path": "packages/postgraphile"
+      "path": "packages/js/postgraphile"
     },
     {
       "name": "auth",
-      "path": "packages/service-auth"
+      "path": "packages/go/service-auth"
     },
     {
       "name": "logger",
-      "path": "packages/service-logger"
+      "path": "packages/go/service-logger"
     },
     {
-      "name": "go-libs",
-      "path": "packages/go-libs"
+      "name": "libs",
+      "path": "packages/go/libs"
     },
     {
-      "name": "go-types",
-      "path": "packages/go-types"
+      "name": "types",
+      "path": "packages/go/types"
     },
     {
       "name": "migrations",
       "path": "db/migrations"
     },
     {
-      "name": "protobufs",
-      "path": "packages/protobufs"
+      "path": "protobufs"
     },
     {
       "name": "root",

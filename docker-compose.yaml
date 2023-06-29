@@ -3,7 +3,7 @@ services:
   authentication:
     build:
       context: .
-      dockerfile: ./packages/service-auth/Dockerfile
+      dockerfile: ./packages/go/service-auth/Dockerfile
     container_name: aperture-auth
     depends_on:
       - database
@@ -25,7 +25,7 @@ services:
         API_URL: ${API_URL}
         FONTAWESOME_NPM_TOKEN: ${FONTAWESOME_NPM_TOKEN}
       context: .
-      dockerfile: ./packages/client/Dockerfile
+      dockerfile: ./packages/js/client/Dockerfile
     container_name: aperture-client
     depends_on:
       - database
@@ -55,7 +55,7 @@ services:
   gateway:
     build:
       context: .
-      dockerfile: ./packages/gateway/Dockerfile
+      dockerfile: ./packages/go/gateway/Dockerfile
     container_name: aperture-gateway
     depends_on:
       - authentication
@@ -72,7 +72,7 @@ services:
   logger:
     build:
       context: .
-      dockerfile: ./packages/service-logger/Dockerfile
+      dockerfile: ./packages/go/service-logger/Dockerfile
     container_name: aperture-logger
     depends_on:
       - database
@@ -101,7 +101,7 @@ services:
   graphql:
     build:
       context: .
-      dockerfile: ./packages/postgraphile/Dockerfile
+      dockerfile: ./packages/js/postgraphile/Dockerfile
     container_name: aperture-graphql
     depends_on:
       - database

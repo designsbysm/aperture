@@ -1,9 +1,9 @@
 go 1.20
 
 use (
-	./packages/gateway
-	./packages/go-libs
-	./packages/go-types
-	./packages/service-auth
-	./packages/service-logger
+	./packages/go/gateway
+	./packages/go/libs
+	./packages/go/service-auth
+	./packages/go/service-logger
+	./packages/go/types
 )
