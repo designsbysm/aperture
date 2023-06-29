@@ -6,5 +6,6 @@ COPY ./packages/postgraphile/package.json .
 RUN yarn install
 
 COPY ./packages/postgraphile .
+COPY .env .
 
 CMD yarn start
