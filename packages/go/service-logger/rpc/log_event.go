@@ -3,8 +3,8 @@ package rpc
 import (
 	"context"
 
+	"aperture/libs/loggerpb"
 	"aperture/service-logger/database"
-	"aperture/service-logger/loggerpb"
 	"aperture/types/loggerlevel"
 	"aperture/types/loggerservice"
 )
