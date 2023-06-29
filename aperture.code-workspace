@@ -1,35 +1,21 @@
 {
   "folders": [
     {
-      "name": "client",
-      "path": "packages/js/client"
-    },
-    {
-      "name": "gateway",
       "path": "packages/go/gateway"
     },
     {
-      "name": "postgraphile",
-      "path": "packages/js/postgraphile"
+      "path": "packages/js/client"
     },
     {
-      "name": "auth",
       "path": "packages/go/service-auth"
     },
     {
-      "name": "logger",
       "path": "packages/go/service-logger"
     },
     {
-      "name": "libs",
-      "path": "packages/go/libs"
+      "path": "packages/js/postgraphile"
     },
     {
-      "name": "types",
-      "path": "packages/go/types"
-    },
-    {
-      "name": "migrations",
       "path": "db/migrations"
     },
     {
