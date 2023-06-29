@@ -16,7 +16,7 @@ func Server() {
 	addCORS(router)
 	AddRoute(router)
 
-	port := viper.GetString("PORT_API")
+	port := viper.GetString("PORT_GATEWAY")
 
 	go func() {
 		if err := router.Run(fmt.Sprintf(":%s", port)); err != nil {
