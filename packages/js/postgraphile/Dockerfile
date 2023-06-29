@@ -9,4 +9,3 @@ COPY ./packages/js/postgraphile .
 COPY .env .
 
 CMD yarn start
-# CMD sleep 5000

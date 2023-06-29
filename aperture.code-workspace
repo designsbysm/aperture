@@ -33,7 +33,7 @@
       "path": "db/migrations"
     },
     {
-      "path": "protobufs"
+      "path": "packages/protobufs"
     },
     {
       "name": "root",
