@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	"net/http"
 
 	"aperture/gateway/rpc"
@@ -17,8 +16,6 @@ type loginRequest struct {
 }
 
 func login(c *gin.Context) {
-	rpc.LogEvent(loggerlevel.Info, "login request")
-
 	req := loginRequest{}
 	if err := c.BindJSON(&req); err != nil {
 		//nolint:errcheck
@@ -35,6 +32,5 @@ func login(c *gin.Context) {
 		return
 	}
 
-	rpc.LogEvent(loggerlevel.Info, fmt.Sprintf("user login: %s", req.Username))
 	c.JSON(http.StatusOK, auth)
 }
